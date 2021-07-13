@@ -1,47 +1,20 @@
-# yang hapus credit anak babi , cape lah aku port
-# frm ultroid plugs thanks
-# Port by: Koala @manusiarakitan
-
-from bs4 import BeautifulSoup
-import urllib
-from LaylaRobot import telethn as tbot
-import glob
-import io
 import os
-import re
-import aiohttp
-import urllib.request
-from urllib.parse import urlencode
-import requests
-from bs4 import BeautifulSoup
+
 from PIL import Image
-from search_engine_parser import GoogleSearch
 
-import bs4
-import html2text
-from bing_image_downloader import downloader
-from telethon import *
-from telethon.tl import functions
-from telethon.tl import types
-from telethon.tl.types import *
-
-from LaylaRobot import *
-from LaylaRobot.events import register
+from userbot import CMD_HELP, bot
+from userbot.events import register
 
 
-@register(pattern="^/google (.*)")
-async def _(event):
-    if event.fwd_from:
-        return
-    
+@register(outgoing=True, pattern=r"^\.tiny(?: |$)(.*)", disable_errors=True)
 async def ultiny(event):
     reply = await event.get_reply_message()
     if not (reply and (reply.media)):
-        await event.edit("`Reply Sticker !`")
+        await event.edit("`Balas Ke Pesan Sticker !`")
         return
     xx = await event.edit("`Processing tiny...`")
     ik = await bot.download_media(reply)
-    im1 = Image.open("resources/man_blank.png")
+    im1 = Image.open("userbot/resources/man_blank.png")
     if ik.endswith(".tgs"):
         await event.client.download_media(reply, "ult.tgs")
         os.system("lottie_convert.py ult.tgs json.json")
@@ -105,7 +78,11 @@ async def ultiny(event):
     os.remove(ik)
 
 
-  __mod_name__ = "Tiny"
-__help__ = """
-/tiny [reply sticker] kawai sticker you get!
-"""
+CMD_HELP.update(
+    {
+        "tiny": "**Plugin : **`tiny`\
+        \n\n  •  **Syntax :** `.tiny` <sambil reply ke media>\
+        \n  •  **Function : **Untuk Mengubah Sticker Menjadi Kecil.\
+    "
+    }
+)
