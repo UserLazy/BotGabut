@@ -143,7 +143,7 @@ async def amireallyalive(alive):
         f"┣ • Python   : v{python_version()} \n"
         f"┣ • Modules  : {len(CMD_HELP)} Modules \n"
         f"┗━━━━━━━━━━━━━━━━━━━\n"
-        f"[BotGabut](https://userlazy.github.io/BotGabut) || [OdaxMusic](https://userlazy.github.io/Oda_Music) || [Group](http://t.me/ZonaGreenland)\n"
+        f"[BotGabut](https://userlazy.github.io/BotGabut) || [Group](http://t.me/ZonaGreenland)\n"
         f"━━━━━━━━━━━━━━━━━━━━\n"
     )
         
