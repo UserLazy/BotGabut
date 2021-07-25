@@ -210,7 +210,7 @@ async def upstream(event):
     if conf == "" and force_update is False:
         await print_changelogs(event, ac_br, changelog)
         await event.delete()
-        return await event.respond('`do ".update now or .update deploy" to update.`')
+        return await event.respond('`do ".update deploy" to update.`')
 
     if force_update:
         await event.edit(
@@ -227,9 +227,6 @@ CMD_HELP.update(
         "update": ">`.update`"
         "\nUsage: Checks if the main userbot repository has any updates "
         "and shows a changelog if so."
-        "\n\n>`.update now`"
-        "\nUsage: Update your userbot, "
-        "if there are any updates in your userbot repository."
         "\n\n>`.update deploy`"
         "\nUsage: Deploy your userbot, Recomended use this"
         "\nThis will triggered deploy always, even no updates."
