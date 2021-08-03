@@ -421,7 +421,7 @@ async def whatanime(e):
     await e.edit("`Searching for result..`")
     file = memory_file(filename, content)
     async with aiohttp.ClientSession() as session:
-        url = "https://trace.moe/api/search"
+        url = "https://api.trace.moe/search"
         async with session.post(url, data={"image": file}) as raw_resp0:
             resp0 = await raw_resp0.text()
         js0 = json.loads(resp0)["docs"]
