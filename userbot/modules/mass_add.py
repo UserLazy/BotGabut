@@ -51,7 +51,7 @@ async def get_chatinfo(event):
     return chat_info
 
 
-@register(outgoing=True, pattern=r"^\.inviteall(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.addall(?: |$)(.*)")
 async def get_users(event):
     sender = await event.get_sender()
     me = await event.client.get_me()
@@ -81,8 +81,9 @@ async def get_users(event):
     return await ram.edit(f"**Terminal Finished** \n\n• Successfully Invited `{s}` people \n• failed to invite `{f}` people")
 
 
-CMD_HELP.update({
-    "invite":
-        "`> .inviteall groups username`\
-          \n-> : __Scrapes users from the given chat to your group__."
-})
+CMD_HELP.update(
+    {
+        "mass_add": ">`.addall <group username>`"
+        "\nFunction: Scrape members for other groups "
+    }
+)
