@@ -1,25 +1,25 @@
-import os
-
 from PIL import Image
 
-from userbot import CMD_HELP, bot
+import os
 from userbot.events import register
+from userbot import CMD_HELP, bot
 
 
-@register(outgoing=True, pattern=r"^\.tiny(?: |$)(.*)", disable_errors=True)
-async def ultiny(event):
+@register(outgoing=True, pattern=r"^\.tiny(?: |$)(.*)")
+async def _(event):
     reply = await event.get_reply_message()
     if not (reply and (reply.media)):
-        await event.edit("`Balas Ke Pesan Sticker !`")
+        await event.edit("`Reply to Sticker`")
         return
-    xx = await event.edit("`Processing tiny...`")
+    await event.edit("`Processing...`")
     ik = await bot.download_media(reply)
-    im1 = Image.open("userbot/resources/man_blank.png")
+    im1 = Image.open("userbot/lorduserbot.png")
     if ik.endswith(".tgs"):
         await event.client.download_media(reply, "ult.tgs")
         os.system("lottie_convert.py ult.tgs json.json")
-        with open("json.json", "r") as json:
-            jsn = json.read()
+        json = open("json.json", "r")
+        jsn = json.read()
+        json.close()
         jsn = jsn.replace("512", "2000")
         open("json.json", "w").write(jsn)
         os.system("lottie_convert.py json.json ult.tgs")
@@ -73,16 +73,10 @@ async def ultiny(event):
         file = "o.webp"
         os.remove("k.png")
     await event.client.send_file(event.chat_id, file, reply_to=event.reply_to_msg_id)
-    await xx.delete()
+    await event.delete()
     os.remove(file)
     os.remove(ik)
 
 
-CMD_HELP.update(
-    {
-        "tiny": "**Plugin : **`tiny`\
-        \n\n  •  **Syntax :** `.tiny` <sambil reply ke media>\
-        \n  •  **Function : **Untuk Mengubah Sticker Menjadi Kecil.\
-    "
-    }
-)
+CMD_HELP.update({"tiny": "`.tiny`\
+    \nPenjelasan: Untuk Memperkecil Sticker."})
