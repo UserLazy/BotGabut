@@ -8,6 +8,8 @@
 # Based code + improve from AdekMaulana and aidilaryanto
 #
 # Memify ported from Userge and Refactored by KenHV
+#
+# Random font memefy by UserLazy
 
 import asyncio
 import io
