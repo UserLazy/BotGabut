@@ -13,10 +13,10 @@ from userbot import CMD_HELP
 
 @register(outgoing=True, pattern="^.logo (.*)")
 async def logo_gen(event):
-    xx = await event.reply("`processing...`")
+    xx = await event.edit("`processing...`")
     name = event.pattern_match.group(1)
     if not name:
-        await event.reply("`Give a name too!`")
+        await event.edit("`Give a name too!`")
     bg_, font_ = "", ""
     if event.reply_to_msg_id:
         temp = await event.get_reply_message()
