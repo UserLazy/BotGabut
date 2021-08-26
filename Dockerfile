@@ -1,13 +1,13 @@
 # Using Python Slim-Buster
-FROM userlazy/botgabut:buster
+FROM biansepang/weebproject:buster
 
 # Clone repo and prepare working directory
-RUN git clone -b master https://github.com/UserLazy/BotGabut /home/botgabut/ \
-    && chmod 777 /home/botgabut \
-    && mkdir /home/botgabut/bin/
+RUN git clone -b master https://github.com/UserLazy/BotGabut /home/weebproject/ \
+    && chmod 777 /home/weebproject \
+    && mkdir /home/weebproject/bin/
 
 # Copies config.env (if exists)
-COPY ./sample_config.env ./config.env* /home/botgabut/
+COPY ./sample_config.env ./config.env* /home/weebproject/
 
 # Setup Working Directory
 WORKDIR /home/botgabut/
