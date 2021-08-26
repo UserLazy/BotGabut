@@ -266,7 +266,19 @@ with bot:
         )
         quit(1)
 
+async def check_alive():
+    await bot.send_message(BOTLOG_CHATID, "**BotGabut\nAlive Now**")
+    return
 
+with bot:
+    try:
+        bot.loop.run_until_complete(check_alive())
+    except BaseException:
+        LOGS.info(
+            "BOTLOG_CHATID environment variable isn't a "
+            "valid entity. Check your environment variables/config.env file.")
+        quit(1)
+        
 async def update_restart_msg(chat_id, msg_id):
     DEFAULTUSER = ALIVE_NAME or "Set `ALIVE_NAME` ConfigVar!"
     message = (
