@@ -10,7 +10,7 @@ RUN git clone -b master https://github.com/UserLazy/BotGabut /home/weebproject/ 
 COPY ./sample_config.env ./config.env* /home/weebproject/
 
 # Setup Working Directory
-WORKDIR /home/botgabut/
+WORKDIR /home/weebproject/
 
 # Finalization
 CMD ["python3","-m","userbot"]
