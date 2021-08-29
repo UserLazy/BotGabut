@@ -65,7 +65,7 @@ async def _neonime(event):
     ht_ = requests.get(url).text
     _bs = bs(ht_, "html.parser")
     bd_ = _bs.findAll('h2', class_='episodeye')
-    out = "<b>➲ Kusonime > New Batch:</b>\n═════════════════\n"
+    out = "<b>➲ Wibudesu > New Batch:</b>\n═════════════════\n"
     for kntl_ in bd_:
         _lucu = kntl_.find('a')
         if not _lucu:
@@ -122,28 +122,7 @@ async def _neonime(event):
                 break
             await event.edit(out, parse_mode="html")
             
-@register(outgoing=True, pattern=r"^\.op ?(.*)")
-async def _neonime(event):
-    await event.edit('`please wait...`')
-    url = 'https://oploverz.bz/'
-    ht_ = requests.get(url).text
-    _bs = bs(ht_, "html.parser")
-    bd_ = _bs.findAll('div', class_='animposx')
-    out = "<b>➲ Samehadaku > New Episode:</b>\n═════════════════\n"
-    for kntl_ in bd_:
-        _lucu = kntl_.find('a')
-        if not _lucu:
-            _lucu = 'none'
-        else:  # FKTnK3aKtFvMSUiWLZrTuAp4g93VSjbXcR5zGmqWAijuAuYgR2ACP8WNot2ZyTRVECks1uV5WWW7muWz5SZkY2P8YbWW6AYLUFTsmFU1oW9Y2GP4
-            tt_ = _lucu.get_text()
-            _tt = re.sub(r'\s+TV\s+Ongoing\s+Season.\d+', '', tt_)
-            link = _lucu['href']
-            out += f"➣ <a href='{link}'>{_tt}</a>\n"
-            if len(out) > 1000:
-                break
-            await event.edit(out, parse_mode="html")
-
-
+            
 @register(outgoing=True, pattern=r"^\.mal ?(.*)")
 async def _neonime(event):
     await event.edit('`please wait...`')
@@ -283,5 +262,5 @@ CMD_HELP.update({"neonime": "**neonime**"
                  "\n  Usage: See Last Update."
                  "\n >`.nl` <`url episode`>"
                  "\n  Usage: Cari link download, Copy url episode dari `.neo` "
-                 "\n Others : .ks | .nk | .sm | .mal | .wb | .op"
+                 "\n Others : .ks | .nk | .sm | .mal | .wb"
 })
