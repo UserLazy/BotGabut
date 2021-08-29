@@ -1,9 +1,10 @@
 """
-	Scrape neonime.site
-	Feature
+ Scrape neonime.site, samehadaku.vip, kusonime.com, lendrive.web.id
+ Feature
            Show new update anime
            Scrape link download
-	By : lel_remake_UserBoto
+ Update By : t.me/erruuu
+ Improve By : t.me/RxyMX
 """
 
 import requests
@@ -13,14 +14,15 @@ from userbot import CMD_HELP
 from userbot.events import register
 
 
-@register(outgoing=True, pattern=r"^\.neonime ?(.*)")
+
+@register(outgoing=True, pattern=r"^\.neo ?(.*)")
 async def _neonime(event):
-    await event.edit('tunggu bentar...')
+    await event.edit('`please wait...`')
     url = 'https://neonime.site/episode/'
     ht_ = requests.get(url).text
     _bs = bs(ht_, "html.parser")
     bd_ = _bs.findAll('td', class_='bb')
-    out = "<b>New Episode:</b>\n\n"
+    out = "<b>➲ Neonime > New Episode:</b>\n═════════════════\n"
     for kntl_ in bd_:
         _lucu = kntl_.find('a')
         if not _lucu:
@@ -29,7 +31,95 @@ async def _neonime(event):
             tt_ = _lucu.get_text()
             _tt = re.sub(r'\s+Subtitle\s+Indonesia\s+Season.\d+', '', tt_)
             link = _lucu['href']
-            out += f"• <a href='{link}'>{_tt}</a>\n"
+            out += f"➣ <a href='{link}'>{_tt}</a>\n"
+            if len(out) > 1000:
+                break
+            await event.edit(out, parse_mode="html")
+
+
+@register(outgoing=True, pattern=r"^\.ks ?(.*)")
+async def _neonime(event):
+    await event.edit('`please wait...`')
+    url = 'https://kusonime.com/'
+    ht_ = requests.get(url).text
+    _bs = bs(ht_, "html.parser")
+    bd_ = _bs.findAll('h2', class_='episodeye')
+    out = "<b>➲ Kusonime > New Batch:</b>\n═════════════════\n"
+    for kntl_ in bd_:
+        _lucu = kntl_.find('a')
+        if not _lucu:
+            _lucu = 'none'
+        else:  # FKTnK3aKtFvMSUiWLZrTuAp4g93VSjbXcR5zGmqWAijuAuYgR2ACP8WNot2ZyTRVECks1uV5WWW7muWz5SZkY2P8YbWW6AYLUFTsmFU1oW9Y2GP4
+            tt_ = _lucu.get_text()
+            _tt = re.sub(r'\s+Subtitle\s+Indonesia\s+Season.\d+', '', tt_)
+            link = _lucu['href']
+            out += f"➣ <a href='{link}'>{_tt}</a>\n"
+            if len(out) > 1000:
+                break
+            await event.edit(out, parse_mode="html")
+
+
+@register(outgoing=True, pattern=r"^\.nk ?(.*)")
+async def _neonime(event):
+    await event.edit('`please wait...`')
+    url = 'https://nekonime.vip/'
+    ht_ = requests.get(url).text
+    _bs = bs(ht_, "html.parser")
+    bd_ = _bs.findAll('div', class_='col-md-4 col-sm-4')
+    out = "<b>➲ Nekonime > New Episode:</b>\n═════════════════\n"
+    for kntl_ in bd_:
+        _lucu = kntl_.find('a')
+        if not _lucu:
+            _lucu = 'none'
+        else:  # FKTnK3aKtFvMSUiWLZrTuAp4g93VSjbXcR5zGmqWAijuAuYgR2ACP8WNot2ZyTRVECks1uV5WWW7muWz5SZkY2P8YbWW6AYLUFTsmFU1oW9Y2GP4
+            tt_ = _lucu.get_text()
+            _tt = re.sub(r'\s+Subtitle\s+Indonesia\s+Season.\d+', '', tt_)
+            link = _lucu['href']
+            out += f"➣ <a href='{link}'>{_tt}</a>\n"
+            
+            await event.edit(out, parse_mode="html")
+
+
+@register(outgoing=True, pattern=r"^\.sm ?(.*)")
+async def _neonime(event):
+    await event.edit('`please wait...`')
+    url = 'https://samehadaku.vip/'
+    ht_ = requests.get(url).text
+    _bs = bs(ht_, "html.parser")
+    bd_ = _bs.findAll('div', class_='animposx')
+    out = "<b>➲ Samehadaku > New Episode:</b>\n═════════════════\n"
+    for kntl_ in bd_:
+        _lucu = kntl_.find('a')
+        if not _lucu:
+            _lucu = 'none'
+        else:  # FKTnK3aKtFvMSUiWLZrTuAp4g93VSjbXcR5zGmqWAijuAuYgR2ACP8WNot2ZyTRVECks1uV5WWW7muWz5SZkY2P8YbWW6AYLUFTsmFU1oW9Y2GP4
+            tt_ = _lucu.get_text()
+            _tt = re.sub(r'\s+TV\s+Ongoing\s+Season.\d+', '', tt_)
+            link = _lucu['href']
+            out += f"➣ <a href='{link}'>{_tt}</a>\n"
+            if len(out) > 1000:
+                break
+            await event.edit(out, parse_mode="html")
+
+
+@register(outgoing=True, pattern=r"^\.mal ?(.*)")
+async def _neonime(event):
+    await event.edit('`please wait...`')
+    url = 'https://myanimelist.net/news'
+    ht_ = requests.get(url).text
+    _bs = bs(ht_, "html.parser")
+    bd_ = _bs.findAll('div', class_='news-list mt16 mr8')
+    out = "<b>➲ Jurnal Otaku > New Information:</b>\n═════════════════\n"
+    for kntl_ in bd_:
+        _lucu = kntl_.find('a')
+        if not _lucu:
+            _lucu = 'none'
+        else:  # FKTnK3aKtFvMSUiWLZrTuAp4g93VSjbXcR5zGmqWAijuAuYgR2ACP8WNot2ZyTRVECks1uV5WWW7muWz5SZkY2P8YbWW6AYLUFTsmFU1oW9Y2GP4
+            tt_ = _lucu.get_text()
+            _tt = re.sub(r'\s+TV\s+Ongoing\s+Season.\d+', '', tt_)
+            link = _lucu['href']
+            judul = _lucu['alt']
+            out += f"➣ <a href='{link}'>{_tt}</a>\n"
             if len(out) > 1000:
                 break
             await event.edit(out, parse_mode="html")
@@ -38,7 +128,7 @@ async def _neonime(event):
 def get_html(url):
     tag_li = []
     req = requests.get(url)
-    res = bs(req.text, "html5lib")
+    res = bs(req.text, "html.parser")
     box = res.find("div", class_="sbox").parent.find_all("li")
     if len(box) != 0:
         for clear in box:
@@ -73,25 +163,83 @@ def link_download(query, url):
 async def _(event):
     url = event.pattern_match.group(1)
     if not url:
-        await event.edit("Masukan url episode, liat .help neonime")
+        await event.edit("Enter your episode url, see .help neonime")
     elif 'https://' not in url:
-        await event.edit('Masukan url')
+        await event.edit('Enter url')
         return
     else:
-        await event.edit("Tunggu nyet..")
-        msg = "`Link Download`\n\n"
+        await event.edit("`please wait..`")
+        msg = "<b>➲ Link Download:</b>\n═════════════════\n"
         p = link_download(1, url)
         for label_name in p["label"]:
-            msg += f"- **{label_name}**:\n"
+            msg += f"<b>↛ {label_name} ↚</b>\n"
         for server_link in p["url"]:
             server_name = server_link["server"]
             server_url = server_link["link"]
-            msg += f"<a href='{server_url}'>{server_name}</a>｜"
+            msg += f"➣ <a href='{server_url}'>{server_name}</a>\n"
+
+        p = link_download(2, url)
+        for label_name in p["label"]:
+            msg += f"\n<b>↛ {label_name} ↚</b>\n"
+        for server_link in p["url"]:
+            server_name = server_link["server"]
+            server_url = server_link["link"]
+            msg += f"➣ <a href='{server_url}'>{server_name}</a>\n"
+
+        p = link_download(3, url)
+        for label_name in p["label"]:
+            msg += f"\n<b>↛ {label_name} ↚</b>\n"
+        for server_link in p["url"]:
+            server_name = server_link["server"]
+            server_url = server_link["link"]
+            msg += f"➣ <a href='{server_url}'>{server_name}</a>\n"
+
+        p = link_download(4, url)
+        for label_name in p["label"]:
+            msg += f"\n<b>↛ {label_name} ↚</b>\n"
+        for server_link in p["url"]:
+            server_name = server_link["server"]
+            server_url = server_link["link"]
+            msg += f"➣ <a href='{server_url}'>{server_name}</a>\n"
+
+        p = link_download(5, url)
+        for label_name in p["label"]:
+            msg += f"\n<b>↛ {label_name} ↚</b>\n"
+        for server_link in p["url"]:
+            server_name = server_link["server"]
+            server_url = server_link["link"]
+            msg += f"➣ <a href='{server_url}'>{server_name}</a>\n"
+
+        p = link_download(6, url)
+        for label_name in p["label"]:
+            msg += f"\n<b>↛ {label_name} ↚</b>\n"
+        for server_link in p["url"]:
+            server_name = server_link["server"]
+            server_url = server_link["link"]
+            msg += f"➣ <a href='{server_url}'>{server_name}</a>\n"
+
+        p = link_download(7, url)
+        for label_name in p["label"]:
+            msg += f"\n<b>↛ {label_name} ↚</b>\n"
+        for server_link in p["url"]:
+            server_name = server_link["server"]
+            server_url = server_link["link"]
+            msg += f"➣ <a href='{server_url}'>{server_name}</a>\n"
+
+        p = link_download(8, url)
+        for label_name in p["label"]:
+            msg += f"\n<b>↛ {label_name} ↚</b>\n"
+        for server_link in p["url"]:
+            server_name = server_link["server"]
+            server_url = server_link["link"]
+            msg += f"➣ <a href='{server_url}'>{server_name}</a>\n"
         await event.edit(msg, parse_mode="html")
 
 
 CMD_HELP.update({"neonime": "**neonime**"
-                 "\n >`.neonime`"
-                 "\n  Usage: Liat anime baru rilis di neonime."
+                 "\n >`.neo`"
+                 "\n  Usage: See Last Update."
                  "\n >`.nl` <`url episode`>"
-                 "\n  Usage: Cari link download, Copy url episode dari `.neonime` "})
+                 "\n  Usage: Cari link download, Copy url episode dari `.neo` "
+                 "\n Lainnya : .ks | .nk | .sm | .mal"
+})
