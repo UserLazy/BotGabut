@@ -25,10 +25,13 @@ async def insta(event):
     reply_message.sender
     if reply_message.sender.bot:
         await event.edit("`Processing....`")
+        await sleep(15)
         return
     await event.edit("`Processing.....`")
+    await sleep(15)
     async with event.client.conversation(chat) as conv:
         try:
+            await sleep(15)
             response = conv.wait_event(
                 events.NewMessage(incoming=True, from_users=1705735308)
             )
