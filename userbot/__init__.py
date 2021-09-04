@@ -98,6 +98,9 @@ ALIVE_NAME = os.environ.get("ALIVE_NAME") or None
 ALIVE_LOGO = (
     os.environ.get("ALIVE_LOGO") or "https://telegra.ph/file/1e73a922dd2093aee4ab5.mp4"
 )
+CMD_BOT_GABUT = (
+    os.environ.get("CMD_BOT_GABUT") or "."
+)
 
 # remove.bg API key
 REM_BG_API_KEY = os.environ.get("REM_BG_API_KEY", None)
