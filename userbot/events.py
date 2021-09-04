@@ -20,10 +20,10 @@ from userbot.utils.pastebin import PasteBin
 
 def register(**args):
     """Register a new event."""
-    pattern = args.get("pattern", ".")
+    pattern = args.get("pattern", None)
     disable_edited = args.get("disable_edited", False)
     ignore_unsafe = args.get("ignore_unsafe", False)
-    unsafe_pattern = r"^[^/!#@\$A-Za-z]"
+    unsafe_pattern = r"f"^{CMD_BOT_GABUT}""
     groups_only = args.get("groups_only", False)
     trigger_on_fwd = args.get("trigger_on_fwd", False)
     disable_errors = args.get("disable_errors", False)
