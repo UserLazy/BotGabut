@@ -14,7 +14,7 @@ from traceback import format_exc
 
 from telethon import events
 
-from userbot import BOTLOG_CHATID, LOGSPAMMER, bot
+from userbot import BOTLOG_CHATID, LOGSPAMMER, bot, CMD_BOT_GABUT
 from userbot.utils.pastebin import PasteBin
 
 
@@ -52,7 +52,7 @@ def register(**args):
 
     if pattern:
         if not ignore_unsafe:
-            args["pattern"] = pattern.replace("^.", unsafe_pattern, 1)
+            args["pattern"] = pattern.replace(f"^{CMD_BOT_GABUT}", unsafe_pattern, 1)
 
     def decorator(func):
         async def wrapper(check):
