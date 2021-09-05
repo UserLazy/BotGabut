@@ -20,10 +20,10 @@ from userbot.utils.pastebin import PasteBin
 
 def register(**args):
     """Register a new event."""
-    pattern = args.get("pattern", None)
+    pattern = args.get("pattern", {CMD_BOT_GABUT})
     disable_edited = args.get("disable_edited", False)
     ignore_unsafe = args.get("ignore_unsafe", False)
-    unsafe_pattern = r"f"^{CMD_BOT_GABUT}""
+    unsafe_pattern = r"^[^/!#@\$A-Za-z]"
     groups_only = args.get("groups_only", False)
     trigger_on_fwd = args.get("trigger_on_fwd", False)
     disable_errors = args.get("disable_errors", False)
@@ -52,7 +52,7 @@ def register(**args):
 
     if pattern:
         if not ignore_unsafe:
-            args["pattern"] = pattern.replace(f"^{CMD_BOT_GABUT}", unsafe_pattern, 1)
+            args["pattern"] = pattern.replace("^.", unsafe_pattern, 1)
 
     def decorator(func):
         async def wrapper(check):
