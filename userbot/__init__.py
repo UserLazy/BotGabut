@@ -26,13 +26,15 @@ load_dotenv("config.env")
 CONSOLE_LOGGER_VERBOSE = sb(os.environ.get("CONSOLE_LOGGER_VERBOSE", "False"))
 
 if CONSOLE_LOGGER_VERBOSE:
+    FORMAT = "[BotGabut] %(message)s"
     basicConfig(
-        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+        format=FORMAT,
         level=DEBUG,
     )
 else:
     basicConfig(
-        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=INFO
+        format=FORMAT,
+        level=INFO
     )
 LOGS = getLogger(__name__)
 
