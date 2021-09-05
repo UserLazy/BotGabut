@@ -11,7 +11,7 @@ from datetime import datetime
 from speedtest import Speedtest
 from telethon import functions
 
-from userbot import CMD_HELP
+from userbot import CMD_HELP, CMD_BOT_GABUT
 from userbot.events import register
 from userbot.utils import humanbytes
 
@@ -62,7 +62,7 @@ async def neardc(event):
     )
 
 
-@register(outgoing=True, pattern=r"^\.ping$")
+@register(outgoing=True, pattern=r"^\f"{CMD_BOT_GABUT}"ping$")
 async def pingme(pong):
     """For .ping command, ping the userbot from any chat."""
     start = datetime.now()
