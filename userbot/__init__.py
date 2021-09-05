@@ -32,6 +32,7 @@ if CONSOLE_LOGGER_VERBOSE:
         level=DEBUG,
     )
 else:
+    FORMAT = "[BotGabut] %(message)s"
     basicConfig(
         format=FORMAT,
         level=INFO
