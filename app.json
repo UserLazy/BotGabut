@@ -43,7 +43,7 @@
       "required": true
     },
     "CMD_BOT_GABUT": {
-      "description": "Custom CMD for your userbot default is [.]",
+      "description": "Custom CMD for your userbot default is [.] usseles ignore this",
       "value": "",
       "required": false
     },
