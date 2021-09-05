@@ -62,7 +62,7 @@ async def neardc(event):
     )
 
 
-@register(outgoing=True, pattern=r"^\f"{CMD_BOT_GABUT}"ping$")
+@register(outgoing=True, pattern=r"^\.ping$")
 async def pingme(pong):
     """For .ping command, ping the userbot from any chat."""
     start = datetime.now()
