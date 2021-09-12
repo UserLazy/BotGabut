@@ -3,7 +3,7 @@ from userbot import CMD_HELP
 from userbot.events import register
 
 
-@register(outgoing=True, pattern=r'^\.kill(?: |$)(.*)')
+@register(outgoing=True, pattern=r"^\.kill(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     await typew.edit("`Mau Gue Santet Lu Broo?..`")
@@ -313,8 +313,9 @@ async def typewriter(typew):
     # I did it for two hours :D just ctrl+c - crtl+v
 
 
-CMD_HELP.update({
-    'santet':
-    '.kill\
-        \nUsage: Gagal Santet.'
-})
+CMD_HELP.update(
+    {
+        "santet": ".kill\
+        \nUsage: Gagal Santet."
+    }
+)

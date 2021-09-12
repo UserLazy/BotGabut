@@ -14,23 +14,22 @@ from userbot import CMD_HELP
 from userbot.events import register
 
 
-
 @register(outgoing=True, pattern=r"^\.neo ?(.*)")
 async def _neonime(event):
-    await event.edit('`please wait...`')
-    url = 'https://neonime.site/episode/'
+    await event.edit("`please wait...`")
+    url = "https://neonime.site/episode/"
     ht_ = requests.get(url).text
     _bs = bs(ht_, "html.parser")
-    bd_ = _bs.findAll('td', class_='bb')
+    bd_ = _bs.findAll("td", class_="bb")
     out = "<b>➲ Neonime > New Episode:</b>\n═════════════════\n"
     for kntl_ in bd_:
-        _lucu = kntl_.find('a')
+        _lucu = kntl_.find("a")
         if not _lucu:
-            _lucu = 'none'
+            _lucu = "none"
         else:  # FKTnK3aKtFvMSUiWLZrTuAp4g93VSjbXcR5zGmqWAijuAuYgR2ACP8WNot2ZyTRVECks1uV5WWW7muWz5SZkY2P8YbWW6AYLUFTsmFU1oW9Y2GP4
             tt_ = _lucu.get_text()
-            _tt = re.sub(r'\s+Subtitle\s+Indonesia\s+Season.\d+', '', tt_)
-            link = _lucu['href']
+            _tt = re.sub(r"\s+Subtitle\s+Indonesia\s+Season.\d+", "", tt_)
+            link = _lucu["href"]
             out += f"➣ <a href='{link}'>{_tt}</a>\n"
             if len(out) > 1000:
                 break
@@ -39,41 +38,42 @@ async def _neonime(event):
 
 @register(outgoing=True, pattern=r"^\.ks ?(.*)")
 async def _neonime(event):
-    await event.edit('`please wait...`')
-    url = 'https://kusonime.com/'
+    await event.edit("`please wait...`")
+    url = "https://kusonime.com/"
     ht_ = requests.get(url).text
     _bs = bs(ht_, "html.parser")
-    bd_ = _bs.findAll('h2', class_='episodeye')
+    bd_ = _bs.findAll("h2", class_="episodeye")
     out = "<b>➲ Kusonime > New Batch:</b>\n═════════════════\n"
     for kntl_ in bd_:
-        _lucu = kntl_.find('a')
+        _lucu = kntl_.find("a")
         if not _lucu:
-            _lucu = 'none'
+            _lucu = "none"
         else:  # FKTnK3aKtFvMSUiWLZrTuAp4g93VSjbXcR5zGmqWAijuAuYgR2ACP8WNot2ZyTRVECks1uV5WWW7muWz5SZkY2P8YbWW6AYLUFTsmFU1oW9Y2GP4
             tt_ = _lucu.get_text()
-            _tt = re.sub(r'\s+Subtitle\s+Indonesia\s+Season.\d+', '', tt_)
-            link = _lucu['href']
+            _tt = re.sub(r"\s+Subtitle\s+Indonesia\s+Season.\d+", "", tt_)
+            link = _lucu["href"]
             out += f"➣ <a href='{link}'>{_tt}</a>\n"
             if len(out) > 1000:
                 break
             await event.edit(out, parse_mode="html")
-            
+
+
 @register(outgoing=True, pattern=r"^\.wb ?(.*)")
 async def _neonime(event):
-    await event.edit('`please wait...`')
-    url = 'https://wibudesu.com/'
+    await event.edit("`please wait...`")
+    url = "https://wibudesu.com/"
     ht_ = requests.get(url).text
     _bs = bs(ht_, "html.parser")
-    bd_ = _bs.findAll('h2', class_='episodeye')
+    bd_ = _bs.findAll("h2", class_="episodeye")
     out = "<b>➲ Wibudesu > New Batch:</b>\n═════════════════\n"
     for kntl_ in bd_:
-        _lucu = kntl_.find('a')
+        _lucu = kntl_.find("a")
         if not _lucu:
-            _lucu = 'none'
+            _lucu = "none"
         else:  # FKTnK3aKtFvMSUiWLZrTuAp4g93VSjbXcR5zGmqWAijuAuYgR2ACP8WNot2ZyTRVECks1uV5WWW7muWz5SZkY2P8YbWW6AYLUFTsmFU1oW9Y2GP4
             tt_ = _lucu.get_text()
-            _tt = re.sub(r'\s+Subtitle\s+Indonesia\s+Season.\d+', '', tt_)
-            link = _lucu['href']
+            _tt = re.sub(r"\s+Subtitle\s+Indonesia\s+Season.\d+", "", tt_)
+            link = _lucu["href"]
             out += f"➣ <a href='{link}'>{_tt}</a>\n"
             if len(out) > 1000:
                 break
@@ -82,64 +82,64 @@ async def _neonime(event):
 
 @register(outgoing=True, pattern=r"^\.nk ?(.*)")
 async def _neonime(event):
-    await event.edit('`please wait...`')
-    url = 'https://nekonime.vip/'
+    await event.edit("`please wait...`")
+    url = "https://nekonime.vip/"
     ht_ = requests.get(url).text
     _bs = bs(ht_, "html.parser")
-    bd_ = _bs.findAll('div', class_='col-md-4 col-sm-4')
+    bd_ = _bs.findAll("div", class_="col-md-4 col-sm-4")
     out = "<b>➲ Nekonime > New Episode:</b>\n═════════════════\n"
     for kntl_ in bd_:
-        _lucu = kntl_.find('a')
+        _lucu = kntl_.find("a")
         if not _lucu:
-            _lucu = 'none'
+            _lucu = "none"
         else:  # FKTnK3aKtFvMSUiWLZrTuAp4g93VSjbXcR5zGmqWAijuAuYgR2ACP8WNot2ZyTRVECks1uV5WWW7muWz5SZkY2P8YbWW6AYLUFTsmFU1oW9Y2GP4
             tt_ = _lucu.get_text()
-            _tt = re.sub(r'\s+Subtitle\s+Indonesia\s+Season.\d+', '', tt_)
-            link = _lucu['href']
+            _tt = re.sub(r"\s+Subtitle\s+Indonesia\s+Season.\d+", "", tt_)
+            link = _lucu["href"]
             out += f"➣ <a href='{link}'>{_tt}</a>\n"
-            
+
             await event.edit(out, parse_mode="html")
 
 
 @register(outgoing=True, pattern=r"^\.sm ?(.*)")
 async def _neonime(event):
-    await event.edit('`please wait...`')
-    url = 'https://samehadaku.vip/'
+    await event.edit("`please wait...`")
+    url = "https://samehadaku.vip/"
     ht_ = requests.get(url).text
     _bs = bs(ht_, "html.parser")
-    bd_ = _bs.findAll('div', class_='animposx')
+    bd_ = _bs.findAll("div", class_="animposx")
     out = "<b>➲ Samehadaku > New Episode:</b>\n═════════════════\n"
     for kntl_ in bd_:
-        _lucu = kntl_.find('a')
+        _lucu = kntl_.find("a")
         if not _lucu:
-            _lucu = 'none'
+            _lucu = "none"
         else:  # FKTnK3aKtFvMSUiWLZrTuAp4g93VSjbXcR5zGmqWAijuAuYgR2ACP8WNot2ZyTRVECks1uV5WWW7muWz5SZkY2P8YbWW6AYLUFTsmFU1oW9Y2GP4
             tt_ = _lucu.get_text()
-            _tt = re.sub(r'\s+TV\s+Ongoing\s+Season.\d+', '', tt_)
-            link = _lucu['href']
+            _tt = re.sub(r"\s+TV\s+Ongoing\s+Season.\d+", "", tt_)
+            link = _lucu["href"]
             out += f"➣ <a href='{link}'>{_tt}</a>\n"
             if len(out) > 1000:
                 break
             await event.edit(out, parse_mode="html")
-            
-            
+
+
 @register(outgoing=True, pattern=r"^\.mal ?(.*)")
 async def _neonime(event):
-    await event.edit('`please wait...`')
-    url = 'https://myanimelist.net/news'
+    await event.edit("`please wait...`")
+    url = "https://myanimelist.net/news"
     ht_ = requests.get(url).text
     _bs = bs(ht_, "html.parser")
-    bd_ = _bs.findAll('div', class_='news-list mt16 mr8')
+    bd_ = _bs.findAll("div", class_="news-list mt16 mr8")
     out = "<b>➲ Jurnal Otaku > New Information:</b>\n═════════════════\n"
     for kntl_ in bd_:
-        _lucu = kntl_.find('a')
+        _lucu = kntl_.find("a")
         if not _lucu:
-            _lucu = 'none'
+            _lucu = "none"
         else:  # FKTnK3aKtFvMSUiWLZrTuAp4g93VSjbXcR5zGmqWAijuAuYgR2ACP8WNot2ZyTRVECks1uV5WWW7muWz5SZkY2P8YbWW6AYLUFTsmFU1oW9Y2GP4
             tt_ = _lucu.get_text()
-            _tt = re.sub(r'\s+TV\s+Ongoing\s+Season.\d+', '', tt_)
-            link = _lucu['href']
-            judul = _lucu['alt']
+            _tt = re.sub(r"\s+TV\s+Ongoing\s+Season.\d+", "", tt_)
+            link = _lucu["href"]
+            judul = _lucu["alt"]
             out += f"➣ <a href='{link}'>{_tt}</a>\n"
             if len(out) > 1000:
                 break
@@ -153,17 +153,15 @@ def get_html(url):
     box = res.find("div", class_="sbox").parent.find_all("li")
     if len(box) != 0:
         for clear in box:
-            if clear.get_text() == 'MP4':
+            if clear.get_text() == "MP4":
                 box.remove(clear)
-            elif clear.get_text() == 'MKV':
+            elif clear.get_text() == "MKV":
                 box.remove(clear)
             else:
                 pass
     for box_ in box:
         tag_li.append(box_)
-    return {
-        "html": tag_li
-    }
+    return {"html": tag_li}
 
 
 def link_download(query, url):
@@ -174,10 +172,7 @@ def link_download(query, url):
         tag_href.append({"server": v.get_text(strip=True), "link": v["href"]})
     for p, o in enumerate(r[query].find_all("label")):
         tag_label.append(o.get_text())
-    return {
-        "label": tag_label,
-        "url": tag_href
-    }
+    return {"label": tag_label, "url": tag_href}
 
 
 @register(outgoing=True, pattern=r"^\.nl ?(.*)")
@@ -185,8 +180,8 @@ async def _(event):
     url = event.pattern_match.group(1)
     if not url:
         await event.edit("Enter your episode url, see .help neonime")
-    elif 'https://' not in url:
-        await event.edit('Enter url')
+    elif "https://" not in url:
+        await event.edit("Enter url")
         return
     else:
         await event.edit("`please wait..`")
@@ -257,10 +252,13 @@ async def _(event):
         await event.edit(msg, parse_mode="html")
 
 
-CMD_HELP.update({"neonime": "**neonime**"
-                 "\n >`.neo`"
-                 "\n  Usage: See Last Update."
-                 "\n >`.nl` <`url episode`>"
-                 "\n  Usage: Cari link download, Copy url episode dari `.neo` "
-                 "\n Others : .ks | .nk | .sm | .mal | .wb"
-})
+CMD_HELP.update(
+    {
+        "neonime": "**neonime**"
+        "\n >`.neo`"
+        "\n  Usage: See Last Update."
+        "\n >`.nl` <`url episode`>"
+        "\n  Usage: Cari link download, Copy url episode dari `.neo` "
+        "\n Others : .ks | .nk | .sm | .mal | .wb"
+    }
+)

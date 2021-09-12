@@ -8,7 +8,7 @@ DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
 # ============================================
 
 
-@register(outgoing=True, pattern='^.g(?: |$)(.*)')
+@register(outgoing=True, pattern="^.g(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     sleep(1)
@@ -17,54 +17,69 @@ async def typewriter(typew):
     await typew.edit("`Ganteng doang`")
     sleep(2)
     await typew.edit("`Jemput cewe depan gang`")
+
+
 # Owner @Si_Dian
 
 
-@register(outgoing=True, pattern='^.g(?: |$)(.*)')
+@register(outgoing=True, pattern="^.g(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     sleep(1)
     await typew.edit(f"**Woii...**")
     sleep(2)
     await typew.edit("`Ganteng doang`")
-    sleep (2)
+    sleep(2)
     await typew.edit("`Ganteng doang jemput cewe depan gang`")
+
+
 # Owner @Si_Dian
 
 
-@register(outgoing=True, pattern='^.c(?: |$)(.*)')
+@register(outgoing=True, pattern="^.c(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     sleep(1)
     await typew.edit("`Cantik doang`")
     sleep(1)
     await typew.edit("`Tapi chat cowok lebih dari satu`")
+
+
 # Owner @Si_Dian
 
 
-@register(outgoing=True, pattern='^.c(?: |$)(.*)')
+@register(outgoing=True, pattern="^.c(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     sleep(1)
     await typew.edit("`Cantik doang`")
     sleep(1)
     await typew.edit("`Tapi chat cowok lebih dari satu`")
+
+
 # Owner @Si_Dian
 
-@register(outgoing=True, pattern='^.brokn(?: |$)(.*)')
+
+@register(outgoing=True, pattern="^.brokn(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     sleep(2)
     await typew.edit(f"**I'M A BROKENT HOME.**")
     sleep(5)
-    await typew.edit("`Tangisan hanya mengacaukan segalanya tapi senyuman membuat mereka yakin aku Tegar`")
+    await typew.edit(
+        "`Tangisan hanya mengacaukan segalanya tapi senyuman membuat mereka yakin aku Tegar`"
+    )
     sleep(5)
-    await typew.edit("`Setiap anak ingin keluarga yang sempurna\ntapi tidak semua anak memilikinya`")
+    await typew.edit(
+        "`Setiap anak ingin keluarga yang sempurna\ntapi tidak semua anak memilikinya`"
+    )
     sleep(5)
-    await typew.edit("`Sayangilah kedua orang tuamu dengan\nsepenuh hati selagi masih ada🙂`")
+    await typew.edit(
+        "`Sayangilah kedua orang tuamu dengan\nsepenuh hati selagi masih ada🙂`"
+    )
 
 
-@register(outgoing=True, pattern='^.oe(?: |$)(.*)')
+@register(outgoing=True, pattern="^.oe(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     sleep(1)
@@ -77,7 +92,7 @@ async def typewriter(typew):
     await typew.edit("`Muka gw Gak Burik Kek Kalian`")
 
 
-@register(outgoing=True, pattern='^.tidr(?: |$)(.*)')
+@register(outgoing=True, pattern="^.tidr(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     sleep(1)
@@ -88,7 +103,7 @@ async def typewriter(typew):
     await typew.edit("`Melainkan untuk dia di akun satu`")
 
 
-@register(outgoing=True, pattern='^.pc(?: |$)(.*)')
+@register(outgoing=True, pattern="^.pc(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     sleep(1)
@@ -101,7 +116,7 @@ async def typewriter(typew):
     await typew.edit("`Awoawok Canda monyet`")
 
 
-@register(outgoing=True, pattern='^.tbat(?: |$)(.*)')
+@register(outgoing=True, pattern="^.tbat(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     sleep(1)
@@ -114,7 +129,7 @@ async def typewriter(typew):
     await typew.edit("`Tobat sadar lu anak haram`")
 
 
-@register(outgoing=True, pattern='^.gbt(?: |$)(.*)')
+@register(outgoing=True, pattern="^.gbt(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     sleep(1)
@@ -136,9 +151,9 @@ async def typewriter(typew):
     await typew.edit("`Asw Gabut bet gw:v`")
 
 
-CMD_HELP.update({
-    "canda":
-    "`.g`\
+CMD_HELP.update(
+    {
+        "canda": "`.g`\
 \nUsage: Untuk nyindir laki.\
 \n\n`.c`\
 \nUsage: Untuk nyindir cewe.\
@@ -152,4 +167,5 @@ CMD_HELP.update({
 \nUsage: Tobat woi tobat.\
 \n\n`.gbt`\
 \nUsage: Buat lu pada yang gabut."
-})
+    }
+)

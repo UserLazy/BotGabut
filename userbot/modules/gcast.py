@@ -52,10 +52,12 @@ async def gucast(event):
     await kk.edit(f"Done in {done} chats, error in {er} chat(s)")
 
 
-CMD_HELP.update({
-    "gcast": "\
+CMD_HELP.update(
+    {
+        "gcast": "\
 `.gcast query`\
 \nUsage: Globally Broadcast from all the Group .\
 \n\n`.gucast query`\
 \nUsage: Globally Broadcast from all the User in PM Chat"
-})
+    }
+)

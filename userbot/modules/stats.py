@@ -11,15 +11,17 @@ from userbot import bot, CMD_HELP
 from userbot.events import register
 
 logging.basicConfig(
-    format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-    level=logging.WARNING)
+    format="[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s", level=logging.WARNING
+)
 logger = logging.getLogger(__name__)
 
 
 @register(outgoing=True, pattern=r"^.stats(?: |$)(.*)")
-async def stats(event: NewMessage.Event) -> None:  # pylint: disable = R0912, R0914, R0915
+async def stats(
+    event: NewMessage.Event,
+) -> None:  # pylint: disable = R0912, R0914, R0915
     """Command to get stats about the account"""
-    await event.edit('`Collecting stats, Wait Master`')
+    await event.edit("`Collecting stats, Wait Master`")
     start_time = time.time()
     private_chats = 0
     bots = 0
@@ -73,21 +75,23 @@ async def stats(event: NewMessage.Event) -> None:  # pylint: disable = R0912, R0
     stop_time = time.time() - start_time
 
     full_name = inline_mention(await event.client.get_me())
-    response = f'🔸 **Stats for {full_name}** \n\n'
-    response += f'**Private Chats:** {private_chats} \n'
-    response += f'   • `Users: {private_chats - bots}` \n'
-    response += f'   • `Bots: {bots}` \n'
-    response += f'**Groups:** {groups} \n'
-    response += f'**Channels:** {broadcast_channels} \n'
-    response += f'**Admin in Groups:** {admin_in_groups} \n'
-    response += f'   • `Creator: {creator_in_groups}` \n'
-    response += f'   • `Admin Rights: {admin_in_groups - creator_in_groups}` \n'
-    response += f'**Admin in Channels:** {admin_in_broadcast_channels} \n'
-    response += f'   • `Creator: {creator_in_channels}` \n'
-    response += f'   • `Admin Rights: {admin_in_broadcast_channels - creator_in_channels}` \n'
-    response += f'**Unread:** {unread} \n'
-    response += f'**Unread Mentions:** {unread_mentions} \n\n'
-    response += f'__It Took:__ {stop_time:.02f}s \n'
+    response = f"🔸 **Stats for {full_name}** \n\n"
+    response += f"**Private Chats:** {private_chats} \n"
+    response += f"   • `Users: {private_chats - bots}` \n"
+    response += f"   • `Bots: {bots}` \n"
+    response += f"**Groups:** {groups} \n"
+    response += f"**Channels:** {broadcast_channels} \n"
+    response += f"**Admin in Groups:** {admin_in_groups} \n"
+    response += f"   • `Creator: {creator_in_groups}` \n"
+    response += f"   • `Admin Rights: {admin_in_groups - creator_in_groups}` \n"
+    response += f"**Admin in Channels:** {admin_in_broadcast_channels} \n"
+    response += f"   • `Creator: {creator_in_channels}` \n"
+    response += (
+        f"   • `Admin Rights: {admin_in_broadcast_channels - creator_in_channels}` \n"
+    )
+    response += f"**Unread:** {unread} \n"
+    response += f"**Unread Mentions:** {unread_mentions} \n\n"
+    response += f"__It Took:__ {stop_time:.02f}s \n"
 
     await event.edit(response)
 
@@ -107,7 +111,7 @@ def inline_mention(user):
 def user_full_name(user):
     names = [user.first_name, user.last_name]
     names = [i for i in list(names) if i]
-    full_name = ' '.join(names)
+    full_name = " ".join(names)
     return full_name
 
 
@@ -125,9 +129,8 @@ async def _(event):
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
-                events.NewMessage(
-                    incoming=True,
-                    from_users=1557162396))
+                events.NewMessage(incoming=True, from_users=1557162396)
+            )
             msg = await event.client.forward_messages(chat, reply_message)
             response = await response
         except YouBlockedUserError:
@@ -138,17 +141,18 @@ async def _(event):
         else:
             if response.text.startswith("Information"):
                 response = conv.wait_event(
-                    events.NewMessage(
-                        incoming=True,
-                        from_users=1557162396))
+                    events.NewMessage(incoming=True, from_users=1557162396)
+                )
                 response = await response
                 await event.delete()
-                await event.client.send_message(event.chat_id, response.message, reply_to=reply_message.id)
-                await event.client.delete_messages(conv.chat_id,
-                                                   [msg.id, response.id])
+                await event.client.send_message(
+                    event.chat_id, response.message, reply_to=reply_message.id
+                )
+                await event.client.delete_messages(conv.chat_id, [msg.id, response.id])
             else:
                 await event.edit("try again")
         await bot.send_read_acknowledge(conv.chat_id)
+
 
 CMD_HELP.update(
     {
