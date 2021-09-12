@@ -11,7 +11,7 @@
 [telegram]: https://t.me/RxyMX
 
 <p align="center">
-    <a href="https://app.codacy.com/gh/UserLazy/BotGabut/dashboard"> <img src="https://img.shields.io/codacy/grade/a723cb464d5a4d25be3152b5d71de82d?color=blue&logo=codacy&style=flat-square" alt="Codacy" /></a><br>
+    [![Codacy Badge](https://app.codacy.com/project/badge/Grade/b0e9be207a6c41d3858c32c0f86d5f86)](https://www.codacy.com/gh/UserLazy/BotGabut/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=UserLazy/BotGabut&amp;utm_campaign=Badge_Grade)
     <a href="https://github.com/UserLazy/BotGabut/stargazers"> <img src="https://img.shields.io/github/stars/UserLazy/BotGabut?logo=github&style=flat-square" alt="Stars" /></a>
     <a href="https://github.com/UserLazy/BotGabut/network/members"> <img src="https://img.shields.io/github/forks/UserLazy/BotGabut?logo=github&style=flat-square" alt="Forks" /></a>
     <a href="https://github.com/UserLazy/BotGabut/watchers"> <img src="https://img.shields.io/github/watchers/UserLazy/BotGabut?logo=github&style=flat-square" alt="Watch" /></a><br>
