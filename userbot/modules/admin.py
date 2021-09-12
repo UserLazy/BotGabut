@@ -17,7 +17,10 @@ from telethon.errors import (
     RightForbiddenError,
     UserAdminInvalidError,
 )
-from telethon.errors.rpcerrorlist import MessageTooLongError, UserIdInvalidError
+from telethon.errors.rpcerrorlist import (
+    MessageTooLongError,
+    UserIdInvalidError,
+)
 from telethon.tl.functions.channels import (
     EditAdminRequest,
     EditBannedRequest,
@@ -34,7 +37,12 @@ from telethon.tl.types import (
     PeerChat,
 )
 
-from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, bot
+from userbot import (
+    BOTLOG,
+    BOTLOG_CHATID,
+    CMD_HELP,
+    bot,
+)
 from userbot.events import register
 
 # =================== CONSTANT ===================
