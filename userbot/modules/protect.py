@@ -9,7 +9,9 @@ from userbot.utils import chrome, googleimagesdownload, options, progress
 from google_images_download import google_images_download
 from userbot.events import register
 from userbot import bot, CMD_HELP, TEMP_DOWNLOAD_DIRECTORY
+
 DELETE_TIMEOUT = 0
+
 
 def progress(current, total):
     logger.info(
@@ -17,6 +19,8 @@ def progress(current, total):
             current, total, (current / total) * 100
         )
     )
+
+
 @register(outgoing=True, pattern=r"^\.x$")
 async def _(event):
     if event.fwd_from:
@@ -66,10 +70,10 @@ async def _(event):
         img_size = img_size_div.find_all("div")
         end = datetime.now()
         ms = (end - start).seconds
-        OUTPUT_STR = """/protecc {prs_text}""".format(
-            **locals())
+        OUTPUT_STR = """/protecc {prs_text}""".format(**locals())
     await event.delete()
     await event.reply(OUTPUT_STR, parse_mode="HTML", link_preview=False)
+
 
 CMD_HELP.update(
     {

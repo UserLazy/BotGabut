@@ -21,9 +21,7 @@ from userbot.events import register
 @register(pattern=r"^\.whois(?: |$)(.*)", outgoing=True)
 async def who(event):
 
-    await event.edit(
-        "**FBI Open The Door!!** `OPEN NOW.....`"
-    )
+    await event.edit("**FBI Open The Door!!** `OPEN NOW.....`")
 
     if not os.path.isdir(TEMP_DOWNLOAD_DIRECTORY):
         os.makedirs(TEMP_DOWNLOAD_DIRECTORY)

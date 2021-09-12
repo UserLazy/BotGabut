@@ -1,4 +1,4 @@
-# Ported By @VckyouuBitch 
+# Ported By @VckyouuBitch
 # Forked By @RxyMX
 # Copyright © BotGabut
 # Hush Hush Sana ajg gausah kesini
@@ -9,7 +9,8 @@ from telethon.tl.functions.messages import GetFullChatRequest
 from telethon.errors import (
     ChannelInvalidError,
     ChannelPrivateError,
-    ChannelPublicGroupNaError)
+    ChannelPublicGroupNaError,
+)
 from telethon.tl.functions.channels import GetFullChannelRequest
 
 from userbot.events import register
@@ -40,7 +41,9 @@ async def get_chatinfo(event):
             await event.reply("`Invalid channel/group`")
             return None
         except ChannelPrivateError:
-            await event.reply("`This is a private channel/group or I am banned from there`")
+            await event.reply(
+                "`This is a private channel/group or I am banned from there`"
+            )
             return None
         except ChannelPublicGroupNaError:
             await event.reply("`Channel or supergroup doesn't exist`")
@@ -65,20 +68,28 @@ async def get_users(event):
         return await ram.edit("`Sorry, Please add users here`")
     s = 0
     f = 0
-    error = 'None'
+    error = "None"
 
     await ram.edit("**TerminalStatus**\n\n`Collecting Users.......`")
     async for user in event.client.iter_participants(ramubotteam.full_chat.id):
         try:
             if error.startswith("Too"):
-                return await ram.edit(f"**Terminal Finished With Error**\n(`May Got Limit Error from telethon Please try agin Later`)\n**Error** : \n`{error}`\n\n• Invited `{s}` people \n• Failed to Invite `{f}` people")
-            await event.client(functions.channels.InviteToChannelRequest(channel=chat, users=[user.id]))
+                return await ram.edit(
+                    f"**Terminal Finished With Error**\n(`May Got Limit Error from telethon Please try agin Later`)\n**Error** : \n`{error}`\n\n• Invited `{s}` people \n• Failed to Invite `{f}` people"
+                )
+            await event.client(
+                functions.channels.InviteToChannelRequest(channel=chat, users=[user.id])
+            )
             s = s + 1
-            await ram.edit(f"**Terminal Running...**\n\n• Invited `{s}` people \n• Failed to Invite `{f}` people\n\n**× LastError:** `{error}`")
+            await ram.edit(
+                f"**Terminal Running...**\n\n• Invited `{s}` people \n• Failed to Invite `{f}` people\n\n**× LastError:** `{error}`"
+            )
         except Exception as e:
             error = str(e)
             f = f + 1
-    return await ram.edit(f"**Terminal Finished** \n\n• Successfully Invited `{s}` people \n• failed to invite `{f}` people")
+    return await ram.edit(
+        f"**Terminal Finished** \n\n• Successfully Invited `{s}` people \n• failed to invite `{f}` people"
+    )
 
 
 CMD_HELP.update(

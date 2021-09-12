@@ -176,9 +176,5 @@ async def gspider(userbot):
         f"`Ungbanned` [{user.first_name}](tg://user?id={user.id}) `in {a} chats.\nRemoved from gbanwatch.`"
     )
 
-CMD_HELP.update(
-    {
-        "gban": ">`.gban <reply/userid`"
-        "\nUsage: Global banned.\n"
-    }
-)
+
+CMD_HELP.update({"gban": ">`.gban <reply/userid`" "\nUsage: Global banned.\n"})

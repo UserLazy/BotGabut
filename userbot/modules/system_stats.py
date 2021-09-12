@@ -144,7 +144,7 @@ async def amireallyalive(alive):
         f"┣ • Modules  : {len(CMD_HELP)} Modules \n"
         f"┗━━━━━━━━━━━━━━━━━━━\n"
     )
-        
+
     if ALIVE_LOGO:
         try:
             logo = ALIVE_LOGO

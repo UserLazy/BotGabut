@@ -19,8 +19,9 @@ async def all(event):
     await bot.send_message(chat, mentions, reply_to=event.message.reply_to_msg_id)
 
 
-CMD_HELP.update({
-    "tag_all":
-    "`.tall`\
+CMD_HELP.update(
+    {
+        "tag_all": "`.tall`\
 \nUsage: Untuk Meng-tag semua anggota yang ada di group."
-})
+    }
+)

@@ -78,5 +78,9 @@ async def _(event):
     os.remove(ik)
 
 
-CMD_HELP.update({"tiny": "`.tiny`\
-    \nPenjelasan: Untuk Memperkecil Sticker."})
+CMD_HELP.update(
+    {
+        "tiny": "`.tiny`\
+    \nPenjelasan: Untuk Memperkecil Sticker."
+    }
+)

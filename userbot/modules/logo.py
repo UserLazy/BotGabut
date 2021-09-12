@@ -93,7 +93,12 @@ async def logo_gen(event):
         if not font_.startswith("resources/fonts"):
             os.remove(font_)
 
-CMD_HELP.update({"logo": "`.logo` `<text>`"
-                 "\nUsage: make logo.\n\n"
-                 "`.logo <reply font file>`"
-                 "\nUsage: make logo.\n"})
+
+CMD_HELP.update(
+    {
+        "logo": "`.logo` `<text>`"
+        "\nUsage: make logo.\n\n"
+        "`.logo <reply font file>`"
+        "\nUsage: make logo.\n"
+    }
+)

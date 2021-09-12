@@ -33,10 +33,7 @@ if CONSOLE_LOGGER_VERBOSE:
     )
 else:
     FORMAT = "[BotGabut] %(message)s"
-    basicConfig(
-        format=FORMAT,
-        level=INFO
-    )
+    basicConfig(format=FORMAT, level=INFO)
 LOGS = getLogger(__name__)
 
 if version_info[0] < 3 or version_info[1] < 8:
@@ -101,9 +98,7 @@ ALIVE_NAME = os.environ.get("ALIVE_NAME") or None
 ALIVE_LOGO = (
     os.environ.get("ALIVE_LOGO") or "https://telegra.ph/file/1e73a922dd2093aee4ab5.mp4"
 )
-CMD_BOT_GABUT = (
-    os.environ.get("CMD_BOT_GABUT") or "."
-)
+CMD_BOT_GABUT = os.environ.get("CMD_BOT_GABUT") or "."
 
 # remove.bg API key
 REM_BG_API_KEY = os.environ.get("REM_BG_API_KEY", None)
@@ -272,9 +267,11 @@ with bot:
         )
         quit(1)
 
+
 async def check_alive():
     await bot.send_message(BOTLOG_CHATID, "**BotGabut\nAlive Now**")
     return
+
 
 with bot:
     try:
@@ -282,9 +279,11 @@ with bot:
     except BaseException:
         LOGS.info(
             "BOTLOG_CHATID environment variable isn't a "
-            "valid entity. Check your environment variables/config.env file.")
+            "valid entity. Check your environment variables/config.env file."
+        )
         quit(1)
-        
+
+
 async def update_restart_msg(chat_id, msg_id):
     DEFAULTUSER = ALIVE_NAME or "Set `ALIVE_NAME` ConfigVar!"
     message = (
