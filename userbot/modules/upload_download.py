@@ -308,6 +308,7 @@ async def upload(event):
     else:
         await event.edit("`404: File/Folder Not Found`")
 
+
 @register(pattern=r"^\.upw (.*)", outgoing=True)
 async def upload(event):
     if event.fwd_from:
@@ -459,7 +460,7 @@ async def upload(event):
             )
     else:
         await event.edit("`404: File/Folder Not Found`")
-          
+
 
 CMD_HELP.update(
     {
@@ -469,7 +470,7 @@ CMD_HELP.update(
         "\nUsage: Downloads file from the replied file/media."
         "\n\n>`.up` <file/folder path in server>"
         "\nUsage: Uploads a locally stored file/folder to the chat."
-         "\n\n>`.upw` <file/folder path in server>"
+        "\n\n>`.upw` <file/folder path in server>"
         "\nUsage: Uploads a locally stored file/folder to the chat without thumbnail and caption."
     }
 )
