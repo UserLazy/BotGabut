@@ -454,11 +454,7 @@ async def upload(event):
 
             await event.delete()
             up_time = (datetime.now() - start_time).seconds
-            await event.respond(
-                f"Uploaded `{len(lst_files)}` files in `{input_str}` folder "
-                f"in `{up_time}` seconds."
-            )
-    else:
+            else:
         await event.edit("`404: File/Folder Not Found`")
 
 
