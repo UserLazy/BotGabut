@@ -30,9 +30,9 @@ if CONSOLE_LOGGER_VERBOSE:
     basicConfig(
         format=FORMAT,
         handlers=[
-        FileHandler("log.txt"),
-        StreamHandler(),
-    ],
+            FileHandler("log.txt"),
+            StreamHandler(),
+        ],
         level=DEBUG,
     )
 else:
@@ -40,9 +40,9 @@ else:
     basicConfig(
         format=FORMAT,
         handlers=[
-        FileHandler("log.txt"),
-        StreamHandler(),
-    ],
+            FileHandler("log.txt"),
+            StreamHandler(),
+        ],
         level=INFO,
     )
 LOGS = getLogger(__name__)
