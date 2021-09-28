@@ -29,11 +29,22 @@ if CONSOLE_LOGGER_VERBOSE:
     FORMAT = "[BotGabut] %(message)s"
     basicConfig(
         format=FORMAT,
+        handlers=[
+        FileHandler("log.txt"),
+        StreamHandler(),
+    ],
         level=DEBUG,
     )
 else:
     FORMAT = "[BotGabut] %(message)s"
-    basicConfig(format=FORMAT, level=INFO)
+    basicConfig(
+        format=FORMAT,
+        handlers=[
+        FileHandler("log.txt"),
+        StreamHandler(),
+    ],
+        level=INFO,
+    )
 LOGS = getLogger(__name__)
 
 if version_info[0] < 3 or version_info[1] < 8:
