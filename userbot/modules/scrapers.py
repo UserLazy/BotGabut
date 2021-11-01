@@ -29,8 +29,8 @@ from telethon.tl.types import DocumentAttributeAudio, DocumentAttributeVideo
 from urbandict import define
 from wikipedia import summary
 from wikipedia.exceptions import DisambiguationError, PageError
-from youtube_dl import YoutubeDL
-from youtube_dl.utils import (
+from yt_dlp import YoutubeDL
+from yt_dlp.utils import (
     ContentTooShortError,
     DownloadError,
     ExtractorError,
@@ -104,35 +104,34 @@ async def carbon_api(e):
 
 
 @register(outgoing=True, pattern=r"^\.img (.*)")
-async def img_sampler(event):
-    """For .img command, search and return images matching the query."""
-    await event.edit("`Processing...`")
+async def goimg(event):
     query = event.pattern_match.group(1)
-    lim = findall(r"lim=\d+", query)
+    if not query:
+        return await event.edit("`Give something to search...`")
+    nn = await event.edit("`Processing...`")
+    lmt = 5
+    if ";" in query:
+        try:
+            lmt = int(query.split(";")[1])
+            query = query.split(";")[0]
+        except BaseException:
+            pass
     try:
-        lim = lim[0]
-        lim = lim.replace("lim=", "")
-        query = query.replace("lim=" + lim[0], "")
-    except IndexError:
-        lim = 7
-    response = googleimagesdownload()
+        gi = googleimagesdownload()
+        args = {
+            "keywords": query,
+            "limit": lmt,
+            "format": "jpg",
+            "output_directory": "./downloads/",
+        }
+        pth = gi.download(args)
+        ok = pth[0][query]
+    except BaseException:
+        return await nn.edit(get_string("autopic_2").format(query))
+    await event.reply(file=ok, message=query)
+    rmtree(f"./downloads/{query}/")
+    await nn.delete()
 
-    # creating list of arguments
-    arguments = {
-        "keywords": query,
-        "limit": lim,
-        "format": "jpg",
-        "no_directory": "no_directory",
-    }
-
-    # passing the arguments to the function
-    paths = response.download(arguments)
-    lst = paths[0][query]
-    await event.client.send_file(
-        await event.client.get_input_entity(event.chat_id), lst
-    )
-    shutil.rmtree(os.path.dirname(os.path.abspath(lst[0])))
-    await event.delete()
 
 
 @register(outgoing=True, pattern=r"^\.currency (.*)")
