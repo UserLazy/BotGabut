@@ -24,7 +24,8 @@ from gtts.lang import tts_langs
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from requests import get
-from pyUltroid.functions.misc import google_search
+from search_engine_parser import BingSearch, GoogleSearch, YahooSearch
+from search_engine_parser.core.exceptions import NoResultsOrTrafficError
 from telethon.tl.types import DocumentAttributeAudio, DocumentAttributeVideo
 from urbandict import define
 from wikipedia import summary
@@ -159,28 +160,60 @@ async def moni(event):
 
 
 @register(outgoing=True, pattern=r"^\.google (.*)")
-async def google(event):
-    inp = event.pattern_match.group(1)
-    if not inp:
-        return await event.edit("`Give something to search...`")
-    x = await event.edit("`Processing...`")
-    gs = await google_search(inp)
-    if not gs:
-        return await event.edit("No Results found for `{}`".format(inp))
-    out = ""
-    for res in gs:
-        text = res["title"]
-        url = res["link"]
-        des = res["description"]
-        out += f" 👉🏻  [{text}]({url})\n`{des}`\n\n"
-    omk = f"**Google Search Query:**\n`{inp}`\n\n**Results:**\n{out}"
-    await eor(x, omk, link_preview=False)
+async def gsearch(q_event):
+    man = await edit_or_reply(q_event, "`Processing...`")
+    match = q_event.pattern_match.group(1)
+    page = re.findall(r"-p\d+", match)
+    lim = re.findall(r"-l\d+", match)
+    try:
+        page = page[0]
+        page = page.replace("-p", "")
+        match = match.replace("-p" + page, "")
+    except IndexError:
+        page = 1
+    try:
+        lim = lim[0]
+        lim = lim.replace("-l", "")
+        match = match.replace("-l" + lim, "")
+        lim = int(lim)
+        if lim <= 0:
+            lim = int(5)
+    except IndexError:
+        lim = 5
+    smatch = match.replace(" ", "+")
+    search_args = (str(smatch), int(page))
+    gsearch = GoogleSearch()
+    bsearch = BingSearch()
+    ysearch = YahooSearch()
+    try:
+        gresults = await gsearch.async_search(*search_args)
+    except NoResultsOrTrafficError:
+        try:
+            gresults = await bsearch.async_search(*search_args)
+        except NoResultsOrTrafficError:
+            try:
+                gresults = await ysearch.async_search(*search_args)
+            except Exception as e:
+                return await edit_delete(man, f"**ERROR:**\n`{e}`", time=10)
+    msg = ""
+    for i in range(lim):
+        if i > len(gresults["links"]):
+            break
+        try:
+            title = gresults["titles"][i]
+            link = gresults["links"][i]
+            desc = gresults["descriptions"][i]
+            msg += f"👉 [{title}]({link})\n`{desc}`\n\n"
+        except IndexError:
+            break
+    await edit_or_reply(
+        man,
+        "**Keyword Google Search:**\n`" + match + "`\n\n**Results:**\n" + msg,
+        link_preview=False,
+        aslink=True,
+        linktext=f"**Result from Keyword** `{match}` **is** :",
+    )
 
-    if BOTLOG:
-        await q_event.client.send_message(
-            BOTLOG_CHATID,
-            "Google Search query `" + match + "` was executed successfully",
-        )
 
 
 @register(outgoing=True, pattern=r"^\.wiki (.*)")
