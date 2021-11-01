@@ -42,6 +42,7 @@ psycopg2-binary
 pybase64
 pylast
 pySmartDL
+py-Ultroid==2021.10.11.1
 python-barcode
 python-dateutil
 python-dotenv
