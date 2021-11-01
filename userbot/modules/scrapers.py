@@ -127,7 +127,7 @@ async def goimg(event):
         pth = gi.download(args)
         ok = pth[0][query]
     except BaseException:
-        return await nn.edit(get_string("autopic_2").format(query))
+        return await nn.edit("No Results found for `{}`".format(query))
     await event.reply(file=ok, message=query)
     rmtree(f"./downloads/{query}/")
     await nn.delete()
@@ -159,34 +159,22 @@ async def moni(event):
 
 
 @register(outgoing=True, pattern=r"^\.google (.*)")
-async def gsearch(q_event):
-    """For .google command, do a Google search."""
-    match = q_event.pattern_match.group(1)
-    page = findall(r"page=\d+", match)
-    try:
-        page = page[0]
-        page = page.replace("page=", "")
-        match = match.replace("page=" + page[0], "")
-    except IndexError:
-        page = 1
-    try:
-        search_args = (str(match), int(page))
-        gsearch = GoogleSearch()
-        gresults = await gsearch.async_search(*search_args)
-        msg = ""
-        for i in range(5):
-            try:
-                title = gresults["titles"][i]
-                link = gresults["links"][i]
-                desc = gresults["descriptions"][i]
-                msg += f"[{title}]({link})\n`{desc}`\n\n"
-            except IndexError:
-                break
-    except BaseException as g_e:
-        return await q_event.edit(f"**Error : ** `{g_e}`")
-    await q_event.edit(
-        "**Search Query:**\n`" + match + "`\n\n**Results:**\n" + msg, link_preview=False
-    )
+async def google(event):
+    inp = event.pattern_match.group(1)
+    if not inp:
+        return await event.edit("`Give something to search...`")
+    x = await event.edit("`Processing...`")
+    gs = await google_search(inp)
+    if not gs:
+        return await event.edit("No Results found for `{}`".format(inp))
+    out = ""
+    for res in gs:
+        text = res["title"]
+        url = res["link"]
+        des = res["description"]
+        out += f" 👉🏻  [{text}]({url})\n`{des}`\n\n"
+    omk = f"**Google Search Query:**\n`{inp}`\n\n**Results:**\n{out}"
+    await eor(x, omk, link_preview=False)
 
     if BOTLOG:
         await q_event.client.send_message(
