@@ -105,7 +105,6 @@ async def carbon_api(e):
 
 @register(outgoing=True, pattern=r"^\.img (.*)")
 async def img_sampler(event):
-    """For .img command, search and return images matching the query."""
     await event.edit("`Processing...`")
     query = event.pattern_match.group(1)
     lim = findall(r"lim=\d+", query)
@@ -114,7 +113,7 @@ async def img_sampler(event):
         lim = lim.replace("lim=", "")
         query = query.replace("lim=" + lim[0], "")
     except IndexError:
-        lim = 7
+        lim = IMG_LIMIT
     response = googleimagesdownload()
 
     # creating list of arguments
@@ -162,7 +161,6 @@ async def moni(event):
 
 @register(outgoing=True, pattern=r"^\.google (.*)")
 async def gsearch(q_event):
-    """For .google command, do a Google search."""
     match = q_event.pattern_match.group(1)
     page = findall(r"page=\d+", match)
     try:
@@ -171,21 +169,18 @@ async def gsearch(q_event):
         match = match.replace("page=" + page[0], "")
     except IndexError:
         page = 1
-    try:
-        search_args = (str(match), int(page))
-        gsearch = GoogleSearch()
-        gresults = await gsearch.async_search(*search_args)
-        msg = ""
-        for i in range(5):
-            try:
-                title = gresults["titles"][i]
-                link = gresults["links"][i]
-                desc = gresults["descriptions"][i]
-                msg += f"[{title}]({link})\n`{desc}`\n\n"
-            except IndexError:
-                break
-    except BaseException as g_e:
-        return await q_event.edit(f"**Error : ** `{g_e}`")
+    search_args = (str(match), int(page))
+    gsearch = GoogleSearch()
+    gresults = await gsearch.async_search(*search_args)
+    msg = ""
+    for i in range(10):
+        try:
+            title = gresults["titles"][i]
+            link = gresults["links"][i]
+            desc = gresults["descriptions"][i]
+            msg += f"[{title}]({link})\n`{desc}`\n\n"
+        except IndexError:
+            break
     await q_event.edit(
         "**Search Query:**\n`" + match + "`\n\n**Results:**\n" + msg, link_preview=False
     )
