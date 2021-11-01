@@ -29,8 +29,8 @@ from telethon.tl.types import DocumentAttributeAudio, DocumentAttributeVideo
 from urbandict import define
 from wikipedia import summary
 from wikipedia.exceptions import DisambiguationError, PageError
-from yt_dlp import YoutubeDL
-from yt_dlp.utils import (
+from yt-dlp.yt_dlp import YoutubeDL
+from yt-dlp.yt_dlp.utils import (
     ContentTooShortError,
     DownloadError,
     ExtractorError,
