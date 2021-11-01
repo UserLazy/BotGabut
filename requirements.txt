@@ -64,3 +64,4 @@ wikipedia
 wordcloud
 youtube-search
 yt-dlp
+youtube_dl
