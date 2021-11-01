@@ -24,8 +24,7 @@ from gtts.lang import tts_langs
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from requests import get
-from search_engine_parser import BingSearch, GoogleSearch, YahooSearch
-from search_engine_parser.core.exceptions import NoResultsOrTrafficError
+from search_engine_parser import GoogleSearch
 from telethon.tl.types import DocumentAttributeAudio, DocumentAttributeVideo
 from urbandict import define
 from wikipedia import summary
@@ -163,57 +162,39 @@ async def moni(event):
 
 @register(outgoing=True, pattern=r"^\.google (.*)")
 async def gsearch(q_event):
-    man = await q_event.edit("`Processing...`")
+    """For .google command, do a Google search."""
     match = q_event.pattern_match.group(1)
-    page = re.findall(r"-p\d+", match)
-    lim = re.findall(r"-l\d+", match)
+    page = findall(r"page=\d+", match)
     try:
         page = page[0]
-        page = page.replace("-p", "")
-        match = match.replace("-p" + page, "")
+        page = page.replace("page=", "")
+        match = match.replace("page=" + page[0], "")
     except IndexError:
         page = 1
     try:
-        lim = lim[0]
-        lim = lim.replace("-l", "")
-        match = match.replace("-l" + lim, "")
-        lim = int(lim)
-        if lim <= 0:
-            lim = int(5)
-    except IndexError:
-        lim = 5
-    smatch = match.replace(" ", "+")
-    search_args = (str(smatch), int(page))
-    gsearch = GoogleSearch()
-    bsearch = BingSearch()
-    ysearch = YahooSearch()
-    try:
+        search_args = (str(match), int(page))
+        gsearch = GoogleSearch()
         gresults = await gsearch.async_search(*search_args)
-    except NoResultsOrTrafficError:
-        try:
-            gresults = await bsearch.async_search(*search_args)
-        except NoResultsOrTrafficError:
+        msg = ""
+        for i in range(5):
             try:
-                gresults = await ysearch.async_search(*search_args)
-            except Exception as e:
-                return await edit_delete(man, f"**ERROR:**\n`{e}`", time=10)
-    msg = ""
-    for i in range(lim):
-        if i > len(gresults["links"]):
-            break
-        try:
-            title = gresults["titles"][i]
-            link = gresults["links"][i]
-            desc = gresults["descriptions"][i]
-            msg += f"👉 [{title}]({link})\n`{desc}`\n\n"
-        except IndexError:
-            break
+                title = gresults["titles"][i]
+                link = gresults["links"][i]
+                desc = gresults["descriptions"][i]
+                msg += f"[{title}]({link})\n`{desc}`\n\n"
+            except IndexError:
+                break
+    except BaseException as g_e:
+        return await q_event.edit(f"**Error : ** `{g_e}`")
     await q_event.edit(
-        "**Keyword Google Search:**\n`" + match + "`\n\n**Results:**\n" + msg,
-        link_preview=False,
-        aslink=True,
-        linktext=f"**Result from Keyword** `{match}` **is** :",
+        "**Search Query:**\n`" + match + "`\n\n**Results:**\n" + msg, link_preview=False
     )
+
+    if BOTLOG:
+        await q_event.client.send_message(
+            BOTLOG_CHATID,
+            "Google Search query `" + match + "` was executed successfully",
+        )
 
 
 @register(outgoing=True, pattern=r"^\.wiki (.*)")
