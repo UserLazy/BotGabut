@@ -14,7 +14,6 @@ Faker==8.1.2
 search-engine-parser
 deezloader
 gitpython
-git+https://github.com/yt-dlp/yt-dlp
 glitch_this
 google-api-python-client
 google-auth-httplib2
@@ -64,4 +63,4 @@ vcsi
 wikipedia
 wordcloud
 youtube-search
-yt_dlp
+yt-dlp
