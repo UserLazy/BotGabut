@@ -12,7 +12,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
 
 
 # Copies config.env (if exists)
-COPY ./sample_config.env ./config.env* /home/weebproject/
+COPY ./sample_config.env ./config.env* /root/TeamUltroid/
 
 # changing workdir
 WORKDIR /root/TeamUltroid/
