@@ -24,7 +24,7 @@ from gtts.lang import tts_langs
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from requests import get
-from search_engine_parser import GoogleSearch
+from pyUltroid.functions.misc import google_search
 from telethon.tl.types import DocumentAttributeAudio, DocumentAttributeVideo
 from urbandict import define
 from wikipedia import summary
