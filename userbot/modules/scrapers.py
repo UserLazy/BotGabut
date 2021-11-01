@@ -133,7 +133,6 @@ async def goimg(event):
     await nn.delete()
 
 
-
 @register(outgoing=True, pattern=r"^\.currency (.*)")
 async def moni(event):
     input_str = event.pattern_match.group(1)
