@@ -38,9 +38,7 @@ async def getmusic(cat):
     for i in user_data:
         video_link = i.get_attribute("href")
         break
-    command = (
-        f"youtube-dl -x --add-metadata --embed-thumbnail --audio-format mp3 {video_link}"
-    )
+    command = f"youtube-dl -x --add-metadata --embed-thumbnail --audio-format mp3 {video_link}"
     os.system(command)
     return video_link
 
