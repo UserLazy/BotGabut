@@ -1,18 +1,21 @@
 # Using Python Slim-Buster
-FROM biansepang/weebproject:buster
+FROM theteamultroid/ultroid:main
 
-# Clone repo and prepare working directory
-RUN git clone -b master https://github.com/UserLazy/BotGabut /home/weebproject/ \
-    && chmod 777 /home/weebproject \
-    && mkdir /home/weebproject/bin/
+ENV TZ=Asia/Jakarta
+
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
+
+    # cloning the repo and installing requirements.
+    && git clone https://github.com/UserLazy/BotGabut.git /root/TeamUltroid/ \
+    && pip3 install --no-cache-dir -r root/TeamUltroid/requirements.txt \
+    && pip3 uninstall av -y && pip3 install av --no-binary av
+
 
 # Copies config.env (if exists)
 COPY ./sample_config.env ./config.env* /home/weebproject/
 
-# Setup Working Directory
-WORKDIR /home/weebproject/
-COPY . /home/weebproject/bin/
-RUN pip3 install -U -r requirements.txt
+# changing workdir
+WORKDIR /root/TeamUltroid/
 
 # Finalization
 CMD ["python3","-m","userbot"]
