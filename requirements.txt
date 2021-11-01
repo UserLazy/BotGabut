@@ -15,7 +15,6 @@ search-engine-parser
 deezloader
 gitpython
 glitch_this
-https://github.com/New-dev0/Telethon/archive/Tarzan.zip
 google-api-python-client
 google-auth-httplib2
 google-auth-oauthlib
@@ -65,4 +64,4 @@ vcsi
 wikipedia
 wordcloud
 youtube-search
-youtube_dl
+yt_dlp
