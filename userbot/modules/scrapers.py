@@ -208,12 +208,12 @@ async def gsearch(q_event):
             msg += f"👉 [{title}]({link})\n`{desc}`\n\n"
         except IndexError:
             break
-    await q_event.edit("**Keyword Google Search:**\n`" + match + "`\n\n**Results:**\n" + msg,
+    await q_event.edit(
+        "**Keyword Google Search:**\n`" + match + "`\n\n**Results:**\n" + msg,
         link_preview=False,
         aslink=True,
         linktext=f"**Result from Keyword** `{match}` **is** :",
     )
-
 
 
 @register(outgoing=True, pattern=r"^\.wiki (.*)")
