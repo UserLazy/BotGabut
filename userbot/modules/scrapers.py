@@ -105,33 +105,35 @@ async def carbon_api(e):
 
 
 @register(outgoing=True, pattern=r"^\.img (.*)")
-async def goimg(event):
+async def img_sampler(event):
+    """For .img command, search and return images matching the query."""
+    await event.edit("`Processing...`")
     query = event.pattern_match.group(1)
-    if not query:
-        return await event.edit("`Give something to search...`")
-    nn = await event.edit("`Processing...`")
-    lmt = 5
-    if ";" in query:
-        try:
-            lmt = int(query.split(";")[1])
-            query = query.split(";")[0]
-        except BaseException:
-            pass
+    lim = findall(r"lim=\d+", query)
     try:
-        gi = googleimagesdownload()
-        args = {
-            "keywords": query,
-            "limit": lmt,
-            "format": "jpg",
-            "output_directory": "./downloads/",
-        }
-        pth = gi.download(args)
-        ok = pth[0][query]
-    except BaseException:
-        return await nn.edit("No Results found for `{}`".format(query))
-    await event.reply(file=ok, message=query)
-    rmtree(f"./downloads/{query}/")
-    await nn.delete()
+        lim = lim[0]
+        lim = lim.replace("lim=", "")
+        query = query.replace("lim=" + lim[0], "")
+    except IndexError:
+        lim = 7
+    response = googleimagesdownload()
+
+    # creating list of arguments
+    arguments = {
+        "keywords": query,
+        "limit": lim,
+        "format": "jpg",
+        "no_directory": "no_directory",
+    }
+
+    # passing the arguments to the function
+    paths = response.download(arguments)
+    lst = paths[0][query]
+    await event.client.send_file(
+        await event.client.get_input_entity(event.chat_id), lst
+    )
+    shutil.rmtree(os.path.dirname(os.path.abspath(lst[0])))
+    await event.delete()
 
 
 @register(outgoing=True, pattern=r"^\.currency (.*)")
@@ -161,7 +163,7 @@ async def moni(event):
 
 @register(outgoing=True, pattern=r"^\.google (.*)")
 async def gsearch(q_event):
-    man = await edit_or_reply(q_event, "`Processing...`")
+    man = await q_event.edit("`Processing...`")
     match = q_event.pattern_match.group(1)
     page = re.findall(r"-p\d+", match)
     lim = re.findall(r"-l\d+", match)
@@ -206,9 +208,7 @@ async def gsearch(q_event):
             msg += f"👉 [{title}]({link})\n`{desc}`\n\n"
         except IndexError:
             break
-    await edit_or_reply(
-        man,
-        "**Keyword Google Search:**\n`" + match + "`\n\n**Results:**\n" + msg,
+    await q_event.edit("**Keyword Google Search:**\n`" + match + "`\n\n**Results:**\n" + msg,
         link_preview=False,
         aslink=True,
         linktext=f"**Result from Keyword** `{match}` **is** :",
