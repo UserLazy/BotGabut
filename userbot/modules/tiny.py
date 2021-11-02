@@ -4,7 +4,12 @@ import os
 from userbot.events import register
 from userbot import CMD_HELP, bot
 
-
+try:
+    import cv2
+except ImportError:
+    cv2 = None
+    
+    
 @register(outgoing=True, pattern=r"^\.tiny(?: |$)(.*)")
 async def _(event):
     reply = await event.get_reply_message()
