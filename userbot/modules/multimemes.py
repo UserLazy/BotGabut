@@ -15,7 +15,6 @@ import asyncio
 import io
 import os
 import random
-import glob
 import re
 import shlex
 import textwrap
@@ -205,9 +204,8 @@ async def add_text_img(image_path, text):
     img = Image.open(image_path).convert("RGBA")
     img_info = img.info
     image_width, image_height = img.size
-    rand = glob.glob("resources/fonts/*")
     font = ImageFont.truetype(
-        font=random.choice(rand),
+        font="resources/ArmWrestler.ttf",
         size=int(image_height * font_size) // 100,
     )
     draw = ImageDraw.Draw(img)
