@@ -8,8 +8,8 @@ try:
     import cv2
 except ImportError:
     cv2 = None
-    
-    
+
+
 @register(outgoing=True, pattern=r"^\.tiny(?: |$)(.*)")
 async def _(event):
     reply = await event.get_reply_message()
