@@ -26,6 +26,10 @@
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/UserLazy/BotGabut)
 
+## Get String -> Telethon
+
+[![GenerateString](https://img.shields.io/badge/repl.it-generateString-yellowgreen)](http://replit.com/@UserLazy/UserLazyString)
+
 ### Docker
 1. Clone this repository on your local machine and `cd` (or `chdir`, anti bloat guy) to it
 2. Edit `sample_config.env` and save it as `config.env`
