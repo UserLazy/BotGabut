@@ -20,7 +20,7 @@ from userbot.utils.pastebin import PasteBin
 
 def register(**args):
     """Register a new event."""
-    pattern = args.get("pattern", None)
+    pattern = args.get("pattern")
     disable_edited = args.get("disable_edited", False)
     ignore_unsafe = args.get("ignore_unsafe", False)
     unsafe_pattern = r"^[^/!#@\$A-Za-z]"
