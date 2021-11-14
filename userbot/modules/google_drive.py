@@ -88,14 +88,8 @@ if __ is not None:
                     G_DRIVE_FOLDER_ID = __.split("folderview?id=")[1]
                 except IndexError:
                     if "http://" not in __ or "https://" not in __:
-                        if any(map(str.isdigit, __)):
-                            _1 = True
-                        else:
-                            _1 = False
-                        if "-" in __ or "_" in __:
-                            _2 = True
-                        else:
-                            _2 = False
+                        _1 = bool(any(map(str.isdigit, __)))
+                        _2 = bool("-" in __ or "_" in __)
                         if True in [_1 or _2]:
                             pass
                         else:
@@ -1084,14 +1078,8 @@ async def google_drive(gdrive):
             uri = value.split()
         else:
             for fileId in value.split():
-                if any(map(str.isdigit, fileId)):
-                    one = True
-                else:
-                    one = False
-                if "-" in fileId or "_" in fileId:
-                    two = True
-                else:
-                    two = False
+                one = bool(any(map(str.isdigit, fileId)))
+                two = bool("-" in fileId or "_" in fileId)
                 if True in [one or two]:
                     try:
                         reply += await download_gdrive(gdrive, service, fileId)
@@ -1202,14 +1190,8 @@ async def set_upload_folder(gdrive):
         ext_id = re.findall(r"\bhttps?://drive\.google\.com\S+", inp)[0]
     except IndexError:
         """- if given value isn't folderURL assume it's an Id -"""
-        if any(map(str.isdigit, inp)):
-            c1 = True
-        else:
-            c1 = False
-        if "-" in inp or "_" in inp:
-            c2 = True
-        else:
-            c2 = False
+        c1 = bool(any(map(str.isdigit, inp)))
+        c2 = bool("-" in inp or "_" in inp)
         if True in [c1 or c2]:
             parent_Id = inp
             await gdrive.edit(
