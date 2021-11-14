@@ -48,9 +48,8 @@ async def variable(var):
                     return True
                 await var.edit("`Please set BOTLOG to True...`")
                 return False
-            else:
-                await var.edit("`Information don't exists...`")
-                return True
+            await var.edit("`Information don't exists...`")
+            return True
         else:
             configvars = heroku_var.to_dict()
             if BOTLOG:
