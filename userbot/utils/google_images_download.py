@@ -600,8 +600,8 @@ class googleimagesdownload:
     # Format the object in readable format
 
     @staticmethod
-    def format_object(object):
-        data = object[1]
+    def format_object(ob):
+        data = ob[1]
         main = data[3]
         info = data[9]
         return {
