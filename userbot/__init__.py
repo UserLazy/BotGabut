@@ -7,10 +7,11 @@
 
 import os
 import signal
+import sys
 from distutils.util import strtobool as sb
 from logging import DEBUG, INFO, basicConfig, getLogger
 from platform import python_version
-from sys import version_info, exit
+from sys import version_info
 from time import sleep
 
 from dotenv import load_dotenv
@@ -44,7 +45,7 @@ if version_info[0] < 3 or version_info[1] < 8:
         "You MUST have a python version of at least 3.8."
         "Multiple features depend on this. Bot quitting."
     )
-    exit(1)
+    sys.exit(1)
 
 # Check if the config was edited by using the already used variable.
 # Basically, its the 'virginity check' for the config file ;)
@@ -56,7 +57,7 @@ if CONFIG_CHECK:
     LOGS.info(
         "Please remove the line mentioned in the first hashtag from the config.env file"
     )
-    exit(1)
+    sys.exit(1)
 
 # Telegram App KEY and HASH
 API_KEY = os.environ.get("API_KEY", None)
