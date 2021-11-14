@@ -57,14 +57,13 @@ async def gspider(userbot):
     me = await userbot.client.get_me()
     await friday.edit(f"`Global Banned user...`")
     my_mention = "[{}](tg://user?id={})".format(me.first_name, me.id)
-    f"@{me.username}" if me.username else my_mention
     await userbot.get_chat()
     a = b = 0
     if userbot.is_private:
         user = userbot.chat
         reason = userbot.pattern_match.group(1)
     else:
-        userbot.chat.title
+        pass
     try:
         user, reason = await get_full_user(userbot)
     except BaseException:
@@ -123,14 +122,13 @@ async def gspider(userbot):
     me = await userbot.client.get_me()
     await friday.edit(f"`Trying To Ungban User !`")
     my_mention = "[{}](tg://user?id={})".format(me.first_name, me.id)
-    f"@{me.username}" if me.username else my_mention
     await userbot.get_chat()
     a = b = 0
     if userbot.is_private:
         user = userbot.chat
         reason = userbot.pattern_match.group(1)
     else:
-        userbot.chat.title
+        pass
     try:
         user, reason = await get_full_user(userbot)
     except BaseException:
