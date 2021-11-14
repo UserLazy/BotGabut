@@ -797,8 +797,6 @@ async def lists(gdrive):
         page_token = response.get("nextPageToken", None)
         if page_token is None:
             break
-
-    del result
     if query == "":
         query = "Not specified"
     if len(message) > 4096:
