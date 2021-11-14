@@ -1070,10 +1070,7 @@ class googleimagesdownload:
     ):
         if not silent_mode and print_urls or no_download:
             print("Image URL: " + image_url)
-        if (
-            ignore_urls
-            and any(url in image_url for url in ignore_urls.split(","))
-        ):
+        if ignore_urls and any(url in image_url for url in ignore_urls.split(",")):
             return (
                 "fail",
                 "Image ignored due to 'ignore url' parameter",

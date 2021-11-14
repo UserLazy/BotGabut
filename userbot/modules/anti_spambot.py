@@ -119,14 +119,15 @@ async def ANTI_SPAMBOTS(welcm):
                         spambot = True
                     else:
                         if (
-                            check_user.first_name in (
-                            "Bitmex",
-                            "Promotion",
-                            "Information",
-                            "Dex",
-                            "Announcements",
-                            "Info",
-                        )
+                            check_user.first_name
+                            in (
+                                "Bitmex",
+                                "Promotion",
+                                "Information",
+                                "Dex",
+                                "Announcements",
+                                "Info",
+                            )
                             and users.last_name == "Bot"
                         ):
                             reason = "Known spambot"
