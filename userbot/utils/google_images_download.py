@@ -1068,17 +1068,18 @@ class googleimagesdownload:
         format,
         ignore_urls,
     ):
-        if not silent_mode:
-            if print_urls or no_download:
-                print("Image URL: " + image_url)
-        if ignore_urls:
-            if any(url in image_url for url in ignore_urls.split(",")):
-                return (
-                    "fail",
-                    "Image ignored due to 'ignore url' parameter",
-                    None,
-                    image_url,
-                )
+        if not silent_mode and print_urls or no_download:
+            print("Image URL: " + image_url)
+        if (
+            ignore_urls
+            and any(url in image_url for url in ignore_urls.split(","))
+        ):
+            return (
+                "fail",
+                "Image ignored due to 'ignore url' parameter",
+                None,
+                image_url,
+            )
         if thumbnail_only:
             return (
                 "success",
@@ -1118,18 +1119,17 @@ class googleimagesdownload:
                 ]
                 # keep everything after the last '/'
                 image_name = str(image_url[(image_url.rfind("/")) + 1 :])
-                if format:
-                    if not image_format or image_format != format:
-                        download_status = "fail"
-                        download_message = "Wrong image format returned. Skipping..."
-                        return_image_name = ""
-                        absolute_path = ""
-                        return (
-                            download_status,
-                            download_message,
-                            return_image_name,
-                            absolute_path,
-                        )
+                if format and not image_format or image_format != format:
+                    download_status = "fail"
+                    download_message = "Wrong image format returned. Skipping..."
+                    return_image_name = ""
+                    absolute_path = ""
+                    return (
+                        download_status,
+                        download_message,
+                        return_image_name,
+                        absolute_path,
+                    )
 
                 if (
                     image_format == ""
@@ -1199,9 +1199,8 @@ class googleimagesdownload:
                 return_image_name = prefix + str(count) + "." + image_name
 
                 # image size parameter
-                if not silent_mode:
-                    if print_size:
-                        print("Image Size: " + str(self.file_size(path)))
+                if not silent_mode and print_size:
+                    print("Image Size: " + str(self.file_size(path)))
 
             except UnicodeEncodeError as e:
                 download_status = "fail"
