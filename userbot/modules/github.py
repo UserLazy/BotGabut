@@ -10,9 +10,7 @@ async def github(event):
     await event.get_chat()
     async with aiohttp.ClientSession() as session, session.get(URL) as request:
         if request.status == 404:
-            return await event.reply(
-                "`" + event.pattern_match.group(1) + " not found`"
-            )
+            return await event.reply("`" + event.pattern_match.group(1) + " not found`")
 
         result = await request.json()
 
