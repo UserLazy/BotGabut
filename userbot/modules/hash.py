@@ -21,14 +21,14 @@ async def gethash(hash_q):
     hashtxt = open("hashdis.txt", "w+")
     hashtxt.write(hashtxt_)
     hashtxt.close()
-    md5 = runapp(["md5sum", "hashdis.txt"], stdout=PIPE)
+    md5 = runapp(["md5sum", "hashdis.txt"], stdout=PIPE, check=True)
     md5 = md5.stdout.decode()
-    sha1 = runapp(["sha1sum", "hashdis.txt"], stdout=PIPE)
+    sha1 = runapp(["sha1sum", "hashdis.txt"], stdout=PIPE, check=True)
     sha1 = sha1.stdout.decode()
-    sha256 = runapp(["sha256sum", "hashdis.txt"], stdout=PIPE)
+    sha256 = runapp(["sha256sum", "hashdis.txt"], stdout=PIPE, check=True)
     sha256 = sha256.stdout.decode()
-    sha512 = runapp(["sha512sum", "hashdis.txt"], stdout=PIPE)
-    runapp(["rm", "hashdis.txt"], stdout=PIPE)
+    sha512 = runapp(["sha512sum", "hashdis.txt"], stdout=PIPE, check=True)
+    runapp(["rm", "hashdis.txt"], stdout=PIPE, check=True)
     sha512 = sha512.stdout.decode()
     ans = (
         "Text: `"
@@ -53,7 +53,7 @@ async def gethash(hash_q):
             reply_to=hash_q.id,
             caption="`It's too big, sending a text file instead. `",
         )
-        runapp(["rm", "hashes.txt"], stdout=PIPE)
+        runapp(["rm", "hashes.txt"], stdout=PIPE, check=True)
     else:
         await hash_q.reply(ans)
 
