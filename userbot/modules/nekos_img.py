@@ -12,10 +12,9 @@ async def get_nekos_img(args):
     nekos_baseurl = "https://nekos.life/api/v2/img/"
     if args == "random_hentai_gif":
         args = "Random_hentai_gif"
-    async with ClientSession() as ses:
-        async with ses.get(nekos_baseurl + args) as r:
-            result = await r.json()
-            return result
+    async with ClientSession() as ses, ses.get(nekos_baseurl + args) as r:
+        result = await r.json()
+        return result
 
 
 @register(outgoing=True, pattern=r"^\.nekos(?: |$)(.*)")
