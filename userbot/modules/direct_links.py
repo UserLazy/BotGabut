@@ -309,53 +309,39 @@ async def uptobox(request, url: str) -> str:
     """ Retrieve file informations """
     uri = f"{origin}/info?fileCodes={FILE_CODE}"
     await request.edit("`Retrieving file informations...`")
-    async with aiohttp.ClientSession() as session:
-        async with session.get(uri) as response:
-            result = json.loads(await response.text())
-            data = result.get("data").get("list")[0]
-            if "error" in data:
-                await request.edit(
-                    "`[ERROR]`\n"
-                    f"`statusCode`: **{data.get('error').get('code')}**\n"
-                    f"`reason`: **{data.get('error').get('message')}**"
-                )
-                return
-            file_name = data.get("file_name")
-            file_size = naturalsize(data.get("file_size"))
+    async with aiohttp.ClientSession() as session, session.get(uri) as response:
+        result = json.loads(await response.text())
+        data = result.get("data").get("list")[0]
+        if "error" in data:
+            await request.edit(
+                "`[ERROR]`\n"
+                f"`statusCode`: **{data.get('error').get('code')}**\n"
+                f"`reason`: **{data.get('error').get('message')}**"
+            )
+            return
+        file_name = data.get("file_name")
+        file_size = naturalsize(data.get("file_size"))
     """ Get waiting token and direct download link """
     uri = f"{origin}?token={USR_TOKEN}&file_code={FILE_CODE}"
-    async with aiohttp.ClientSession() as session:
-        async with session.get(uri) as response:
-            result = json.loads(await response.text())
-            status = result.get("message")
-            if status == "Waiting needed":
-                wait = result.get("data").get("waiting")
-                waitingToken = result.get("data").get("waitingToken")
-                await request.edit(f"`Waiting for about {time_formatter(wait)}.`")
-                # for some reason it doesn't go as i planned
-                # so make it 1 minute just to be save enough
-                await asyncio.sleep(wait + 60)
-                uri += f"&waitingToken={waitingToken}"
-                async with session.get(uri) as response:
-                    await request.edit("`Generating direct download link...`")
-                    result = json.loads(await response.text())
-                    status = result.get("message")
-                    if status == "Success":
-                        webLink = result.get("data").get("dlLink")
-                        await request.edit(f"[{file_name} ({file_size})]({webLink})")
-                        return
-                    await request.edit(
-                        "`[ERROR]`\n"
-                        f"`statusCode`: **{result.get('statusCode')}**\n"
-                        f"`reason`: **{result.get('data')}**\n"
-                        f"`status`: **{status}**"
-                    )
+    async with aiohttp.ClientSession() as session, session.get(uri) as response:
+        result = json.loads(await response.text())
+        status = result.get("message")
+        if status == "Waiting needed":
+            wait = result.get("data").get("waiting")
+            waitingToken = result.get("data").get("waitingToken")
+            await request.edit(f"`Waiting for about {time_formatter(wait)}.`")
+            # for some reason it doesn't go as i planned
+            # so make it 1 minute just to be save enough
+            await asyncio.sleep(wait + 60)
+            uri += f"&waitingToken={waitingToken}"
+            async with session.get(uri) as response:
+                await request.edit("`Generating direct download link...`")
+                result = json.loads(await response.text())
+                status = result.get("message")
+                if status == "Success":
+                    webLink = result.get("data").get("dlLink")
+                    await request.edit(f"[{file_name} ({file_size})]({webLink})")
                     return
-            elif status == "Success":
-                webLink = result.get("data").get("dlLink")
-                await request.edit(f"[{file_name} ({file_size})]({webLink})")
-                return
-            else:
                 await request.edit(
                     "`[ERROR]`\n"
                     f"`statusCode`: **{result.get('statusCode')}**\n"
@@ -363,6 +349,18 @@ async def uptobox(request, url: str) -> str:
                     f"`status`: **{status}**"
                 )
                 return
+        elif status == "Success":
+            webLink = result.get("data").get("dlLink")
+            await request.edit(f"[{file_name} ({file_size})]({webLink})")
+            return
+        else:
+            await request.edit(
+                "`[ERROR]`\n"
+                f"`statusCode`: **{result.get('statusCode')}**\n"
+                f"`reason`: **{result.get('data')}**\n"
+                f"`status`: **{status}**"
+            )
+            return
 
 
 async def useragent():
