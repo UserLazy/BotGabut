@@ -344,14 +344,13 @@ async def uptobox(request, url: str) -> str:
                         webLink = result.get("data").get("dlLink")
                         await request.edit(f"[{file_name} ({file_size})]({webLink})")
                         return
-                    else:
-                        await request.edit(
-                            "`[ERROR]`\n"
-                            f"`statusCode`: **{result.get('statusCode')}**\n"
-                            f"`reason`: **{result.get('data')}**\n"
-                            f"`status`: **{status}**"
-                        )
-                        return
+                    await request.edit(
+                        "`[ERROR]`\n"
+                        f"`statusCode`: **{result.get('statusCode')}**\n"
+                        f"`reason`: **{result.get('data')}**\n"
+                        f"`status`: **{status}**"
+                    )
+                    return
             elif status == "Success":
                 webLink = result.get("data").get("dlLink")
                 await request.edit(f"[{file_name} ({file_size})]({webLink})")

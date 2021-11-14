@@ -146,10 +146,9 @@ async def get_video_thumb(file, output):
     t_resp, e_resp = await run_cmd(command)
     if os.path.lexists(output):
         return output
-    else:
-        LOGS.info(t_resp)
-        LOGS.info(e_resp)
-        return None
+    LOGS.info(t_resp)
+    LOGS.info(e_resp)
+    return None
 
 
 @register(pattern=r"^\.up (.*)", outgoing=True)

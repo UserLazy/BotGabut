@@ -48,11 +48,10 @@ async def lyrics(lyric):
         )
         os.remove("lyrics.txt")
         return True
-    else:
-        await lyric.edit(
-            f"**Search query**:\n`{artist}` - `{song}`" f"\n\n```{songs.lyrics}```"
-        )
-        return True
+    await lyric.edit(
+        f"**Search query**:\n`{artist}` - `{song}`" f"\n\n```{songs.lyrics}```"
+    )
+    return True
 
 
 CMD_HELP.update(

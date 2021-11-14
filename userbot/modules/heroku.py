@@ -46,9 +46,8 @@ async def variable(var):
                     )
                     await var.edit("`Received to BOTLOG_CHATID...`")
                     return True
-                else:
-                    await var.edit("`Please set BOTLOG to True...`")
-                    return False
+                await var.edit("`Please set BOTLOG to True...`")
+                return False
             else:
                 await var.edit("`Information don't exists...`")
                 return True
@@ -63,9 +62,8 @@ async def variable(var):
                 )
                 await var.edit("`Received to BOTLOG_CHATID...`")
                 return True
-            else:
-                await var.edit("`Please set BOTLOG to True...`")
-                return False
+            await var.edit("`Please set BOTLOG to True...`")
+            return False
     elif exe == "del":
         await var.edit("`Deleting information...`")
         variable = var.pattern_match.group(2)
