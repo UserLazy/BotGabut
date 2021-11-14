@@ -126,10 +126,7 @@ async def logo_gen(event):
         await xx.delete()
     if os.path.exists(bg_):
         os.remove(bg_)
-    if (
-        os.path.exists(font_)
-        and not font_.startswith("resources/fonts")
-    ):
+    if os.path.exists(font_) and not font_.startswith("resources/fonts"):
         os.remove(font_)
 
 
