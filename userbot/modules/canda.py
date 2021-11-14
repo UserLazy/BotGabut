@@ -12,7 +12,7 @@ DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
 async def typewriter(typew):
     typew.pattern_match.group(1)
     sleep(1)
-    await typew.edit(f"**Woii...**")
+    await typew.edit("**Woii...**")
     sleep(2)
     await typew.edit("`Ganteng doang`")
     sleep(2)
@@ -26,7 +26,7 @@ async def typewriter(typew):
 async def typewriter(typew):
     typew.pattern_match.group(1)
     sleep(1)
-    await typew.edit(f"**Woii...**")
+    await typew.edit("**Woii...**")
     sleep(2)
     await typew.edit("`Ganteng doang`")
     sleep(2)
@@ -64,7 +64,7 @@ async def typewriter(typew):
 async def typewriter(typew):
     typew.pattern_match.group(1)
     sleep(2)
-    await typew.edit(f"**I'M A BROKENT HOME.**")
+    await typew.edit("**I'M A BROKENT HOME.**")
     sleep(5)
     await typew.edit(
         "`Tangisan hanya mengacaukan segalanya tapi senyuman membuat mereka yakin aku Tegar`"
@@ -83,7 +83,7 @@ async def typewriter(typew):
 async def typewriter(typew):
     typew.pattern_match.group(1)
     sleep(1)
-    await typew.edit(f"**oee....**")
+    await typew.edit("**oee....**")
     sleep(3)
     await typew.edit("`Muka kalian 8 bit...`")
     sleep(3)
@@ -96,7 +96,7 @@ async def typewriter(typew):
 async def typewriter(typew):
     typew.pattern_match.group(1)
     sleep(1)
-    await typew.edit(f"**Eh, beban keluarga tdr woi**")
+    await typew.edit("**Eh, beban keluarga tdr woi**")
     sleep(2)
     await typew.edit("`Sadar gadangnya bukan untukmu.`")
     sleep(2)
@@ -107,7 +107,7 @@ async def typewriter(typew):
 async def typewriter(typew):
     typew.pattern_match.group(1)
     sleep(1)
-    await typew.edit(f"**Eh, yelah pc doang jadian kagak**")
+    await typew.edit("**Eh, yelah pc doang jadian kagak**")
     sleep(2)
     await typew.edit("`Percuma Jadian putus iya, ngewe kgk.`")
     sleep(2)
@@ -120,7 +120,7 @@ async def typewriter(typew):
 async def typewriter(typew):
     typew.pattern_match.group(1)
     sleep(1)
-    await typew.edit(f"**Eh beban keluarga**")
+    await typew.edit("**Eh beban keluarga**")
     sleep(2)
     await typew.edit("`Bapak lu kerja keras nafkahin keluarga`")
     sleep(2)
@@ -133,7 +133,7 @@ async def typewriter(typew):
 async def typewriter(typew):
     typew.pattern_match.group(1)
     sleep(1)
-    await typew.edit(f"**Nyanyi dikit bolehlah ya:v**")
+    await typew.edit("**Nyanyi dikit bolehlah ya:v**")
     sleep(2)
     await typew.edit("`Du🤸‍♂️`")
     sleep(2)

@@ -15,7 +15,7 @@ async def _(event):
         return
     input_str = event.pattern_match.group(1).strip()
     chat = "@SpotifyNowBot"
-    now = f"/now"
+    now = "/now"
     await event.edit("`Processing...`")
     try:
         async with event.client.conversation(chat) as conv:

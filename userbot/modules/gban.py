@@ -55,7 +55,7 @@ async def gspider(userbot):
     else:
         friday = await lol.edit("`Gbanning......`")
     me = await userbot.client.get_me()
-    await friday.edit(f"`Global Banned user...`")
+    await friday.edit("`Global Banned user...`")
     my_mention = "[{}](tg://user?id={})".format(me.first_name, me.id)
     await userbot.get_chat()
     a = b = 0

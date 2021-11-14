@@ -112,14 +112,14 @@ async def logo_gen(event):
     draw.text(
         (x, y), name, font=font, fill="white", stroke_width=strke, stroke_fill="black"
     )
-    flnme = f"BotGabut.png"
+    flnme = "BotGabut.png"
     img.save(flnme, "png")
     await xx.edit("`Done!`")
     if os.path.exists(flnme):
         await event.client.send_file(
             event.chat_id,
             file=flnme,
-            caption=f"Logo Created",
+            caption="Logo Created",
             force_document=True,
         )
         os.remove(flnme)

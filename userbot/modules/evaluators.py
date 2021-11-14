@@ -69,7 +69,7 @@ async def aexec(code, smessatatus):
 
     reply = await event.get_reply_message()
     exec(
-        f"async def __aexec(message, reply, client): "
+        "async def __aexec(message, reply, client): "
         + "\n event = smessatatus = message"
         + "".join(f"\n {l}" for l in code.split("\n"))
     )
