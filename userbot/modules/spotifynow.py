@@ -37,33 +37,32 @@ async def _(event):
                 await event.edit("`You're listening to those annoying ads.`")
                 await event.client.delete_messages(conv.chat_id, [msg.id, response.id])
                 return
-            else:
-                if input_str == "s":
-                    downloaded_file_name = await event.client.download_media(
-                        response.media, TEMP_DOWNLOAD_DIRECTORY + "spot.webp"
-                    )
-                    link = response.reply_markup.rows[0].buttons[0].url
-                    spot = await event.client.send_file(
-                        event.chat_id,
-                        downloaded_file_name,
-                        force_document=False,
-                    )
-                    await event.respond(
-                        f"[Play on Spotify]({link})", reply_to=spot, link_preview=False
-                    )
-                elif not input_str:
-                    downloaded_file_name = await event.client.download_media(
-                        response.media, TEMP_DOWNLOAD_DIRECTORY
-                    )
-                    link = response.reply_markup.rows[0].buttons[0].url
-                    await event.client.send_file(
-                        event.chat_id,
-                        downloaded_file_name,
-                        force_document=False,
-                        caption=f"[Play on Spotify]({link})",
-                    )
-                """cleanup chat after completed"""
-                await event.client.delete_messages(conv.chat_id, [msg.id, response.id])
+            if input_str == "s":
+                downloaded_file_name = await event.client.download_media(
+                    response.media, TEMP_DOWNLOAD_DIRECTORY + "spot.webp"
+                )
+                link = response.reply_markup.rows[0].buttons[0].url
+                spot = await event.client.send_file(
+                    event.chat_id,
+                    downloaded_file_name,
+                    force_document=False,
+                )
+                await event.respond(
+                    f"[Play on Spotify]({link})", reply_to=spot, link_preview=False
+                )
+            elif not input_str:
+                downloaded_file_name = await event.client.download_media(
+                    response.media, TEMP_DOWNLOAD_DIRECTORY
+                )
+                link = response.reply_markup.rows[0].buttons[0].url
+                await event.client.send_file(
+                    event.chat_id,
+                    downloaded_file_name,
+                    force_document=False,
+                    caption=f"[Play on Spotify]({link})",
+                )
+            """cleanup chat after completed"""
+            await event.client.delete_messages(conv.chat_id, [msg.id, response.id])
         await event.delete()
         return os.remove(downloaded_file_name)
     except TOError:
