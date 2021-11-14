@@ -2,13 +2,13 @@
 # Don't edit or you gay
 # credits: spechide,ravana69,mkaraniya & me
 from telethon import events
+from telethon.errors.rpcerrorlist import MessageIdInvalidError
 
 import asyncio
 
 from userbot.events import register
 from userbot import CMD_HELP, bot, ALIVE_NAME
 from collections import deque
-from telethon.errors.rpcerrorlist import MessageIdInvalidError
 import random
 
 # ================= CONSTANT =================
