@@ -1080,7 +1080,7 @@ async def google_drive(gdrive):
                 await gdrive.delete()
                 return True
             return None
-        elif re.findall(r"\bhttps?://.*\.\S+", value) or "magnet:?" in value:
+        if re.findall(r"\bhttps?://.*\.\S+", value) or "magnet:?" in value:
             uri = value.split()
         else:
             for fileId in value.split():
