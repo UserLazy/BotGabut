@@ -136,10 +136,9 @@ async def download_api(dl):
     await dl.edit("`Getting information...`")
     driver.get(URL)
     error = driver.find_elements_by_class_name("swal2-content")
-    if len(error) > 0:
-        if error[0].text == "File Not Found.":
-            await dl.edit(f"`FileNotFoundError`: {URL} is not found.")
-            return
+    if len(error) > 0 and error[0].text == "File Not Found.":
+        await dl.edit(f"`FileNotFoundError`: {URL} is not found.")
+        return
     datas = driver.find_elements_by_class_name("download__meta")
     """ - enumerate data to make sure we download the matched version - """
     md5_origin = None
