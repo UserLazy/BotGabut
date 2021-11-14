@@ -88,14 +88,8 @@ if __ is not None:
                     G_DRIVE_FOLDER_ID = __.split("folderview?id=")[1]
                 except IndexError:
                     if "http://" not in __ or "https://" not in __:
-                        if any(map(str.isdigit, __)):
-                            _1 = True
-                        else:
-                            _1 = False
-                        if "-" in __ or "_" in __:
-                            _2 = True
-                        else:
-                            _2 = False
+                        _1 = bool(any(map(str.isdigit, __)))
+                        _2 = bool("-" in __ or "_" in __)
                         if True in [_1 or _2]:
                             pass
                         else:
