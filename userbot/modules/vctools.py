@@ -33,7 +33,7 @@ def user_list(l, n):
         yield l[i : i + n]
 
 
-@register(outgoing=True, pattern=r"startvc$"))
+@register(outgoing=True, pattern=r"^\.startvc(?: |$)(.*)")
 async def start_voice(c):
     chat = await c.get_chat()
     admin = chat.admin_rights
@@ -49,7 +49,7 @@ async def start_voice(c):
         await c.edit(f"**ERROR:** `{ex}`")
 
 
-@register(outgoing=True, pattern=r"stopvc$"))
+@register(outgoing=True, pattern=r"^\.stopvc(?: |$)(.*)")
 async def stop_voice(c):
     chat = await c.get_chat()
     admin = chat.admin_rights
@@ -65,7 +65,7 @@ async def stop_voice(c):
         await c.edit(f"**ERROR:** `{ex}`")
 
 
-@register(outgoing=True, pattern=r"vcinvite"))
+@register(outgoing=True, pattern=r"^\.vcinvite(?: |$)(.*)")
 async def _(c):
     await c.edit("`Inviting Members to Voice Chat...`")
     users = []
@@ -83,7 +83,7 @@ async def _(c):
     await c.edit(f"`{z}` **Orang Berhasil diundang ke VCG**")
 
 
-@register(outgoing=True, pattern=r"vctitle(?: |$)(.*)"))
+@register(outgoing=True, pattern=r"^\.vctitle(?: |$)(.*)"))
 async def change_title(e):
     title = e.pattern_match.group(1).lower()
     chat = await e.get_chat()
