@@ -29,6 +29,7 @@ from telethon.tl.types import DocumentAttributeAudio, DocumentAttributeVideo
 from urbandict import define
 from wikipedia import summary
 from wikipedia.exceptions import DisambiguationError, PageError
+from youtube_search import YoutubeSearch
 from yt_dlp import YoutubeDL
 from yt_dlp.utils import (
     ContentTooShortError,
@@ -40,7 +41,6 @@ from yt_dlp.utils import (
     UnavailableVideoError,
     XAttrMetadataError,
 )
-from youtube_search import YoutubeSearch
 
 from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, TEMP_DOWNLOAD_DIRECTORY
 from userbot.events import register
@@ -105,6 +105,7 @@ async def carbon_api(e):
 
 @register(outgoing=True, pattern=r"^\.img (.*)")
 async def img_sampler(event):
+    """For .img command, search and return images matching the query."""
     await event.edit("`Processing...`")
     query = event.pattern_match.group(1)
     lim = findall(r"lim=\d+", query)
@@ -113,7 +114,7 @@ async def img_sampler(event):
         lim = lim.replace("lim=", "")
         query = query.replace("lim=" + lim[0], "")
     except IndexError:
-        lim = 5
+        lim = 7
     response = googleimagesdownload()
 
     # creating list of arguments
@@ -134,33 +135,31 @@ async def img_sampler(event):
     await event.delete()
 
 
-@register(outgoing=True, pattern=r"^\.currency (.*)")
+@register(outgoing=True, pattern=r"^\.currency ([\d\.]+) ([a-zA-Z]+) ([a-zA-Z]+)")
 async def moni(event):
-    input_str = event.pattern_match.group(1)
-    input_sgra = input_str.split(" ")
-    if len(input_sgra) == 3:
-        try:
-            number = float(input_sgra[0])
-            currency_from = input_sgra[1].upper()
-            currency_to = input_sgra[2].upper()
-            request_url = f"https://api.ratesapi.io/api/latest?base={currency_from}"
-            current_response = get(request_url).json()
-            if currency_to in current_response["rates"]:
-                current_rate = float(current_response["rates"][currency_to])
-                rebmun = round(number * current_rate, 2)
-                await event.edit(f"{number} {currency_from} = {rebmun} {currency_to}")
-            else:
-                await event.edit(
-                    "`This seems to be some alien currency, which I can't convert right now.`"
-                )
-        except Exception as e:
-            await event.edit(str(e))
-    else:
-        return await event.edit("`Invalid syntax.`")
+    c_from_val = float(event.pattern_match.group(1))
+    c_from = (event.pattern_match.group(2)).upper()
+    c_to = (event.pattern_match.group(3)).upper()
+    try:
+        response = get(
+            "https://api.frankfurter.app/latest",
+            params={"from": c_from, "to": c_to},
+        ).json()
+    except Exception:
+        await event.edit("**Error: API is down.**")
+        return
+    if "error" in response:
+        await event.edit(
+            "**This seems to be some alien currency, which I can't convert right now.**"
+        )
+        return
+    c_to_val = round(c_from_val * response["rates"][c_to], 2)
+    await event.edit(f"**{c_from_val} {c_from} = {c_to_val} {c_to}**")
 
 
 @register(outgoing=True, pattern=r"^\.google (.*)")
 async def gsearch(q_event):
+    """For .google command, do a Google search."""
     match = q_event.pattern_match.group(1)
     page = findall(r"page=\d+", match)
     try:
@@ -169,18 +168,21 @@ async def gsearch(q_event):
         match = match.replace("page=" + page[0], "")
     except IndexError:
         page = 1
-    search_args = (str(match), int(page))
-    gsearch = GoogleSearch()
-    gresults = await gsearch.async_search(*search_args)
-    msg = ""
-    for i in range(10):
-        try:
-            title = gresults["titles"][i]
-            link = gresults["links"][i]
-            desc = gresults["descriptions"][i]
-            msg += f"[{title}]({link})\n`{desc}`\n\n"
-        except IndexError:
-            break
+    try:
+        search_args = (str(match), int(page))
+        gsearch = GoogleSearch()
+        gresults = await gsearch.async_search(*search_args)
+        msg = ""
+        for i in range(5):
+            try:
+                title = gresults["titles"][i]
+                link = gresults["links"][i]
+                desc = gresults["descriptions"][i]
+                msg += f"[{title}]({link})\n`{desc}`\n\n"
+            except IndexError:
+                break
+    except BaseException as g_e:
+        return await q_event.edit(f"**Error : ** `{g_e}`")
     await q_event.edit(
         "**Search Query:**\n`" + match + "`\n\n**Results:**\n" + msg, link_preview=False
     )
